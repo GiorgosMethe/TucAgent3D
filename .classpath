@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="/home/methe/workspace/robocup/lib/runtime/commons-math-1.2.jar"/>
+	<classpathentry kind="lib" path="/home/methe/workspace/robocup/lib/runtime/vecmath.jar"/>
+	<classpathentry kind="lib" path="/home/methe/workspace/robocup/lib/test/asm-3.1.jar"/>
+	<classpathentry kind="lib" path="/home/methe/workspace/robocup/lib/test/cglib-2.2.jar"/>
+	<classpathentry kind="lib" path="/home/methe/workspace/robocup/lib/test/easymock.jar"/>
+	<classpathentry kind="lib" path="/home/methe/workspace/robocup/lib/test/easymockclassextension.jar"/>
+	<classpathentry kind="lib" path="/home/methe/workspace/robocup/lib/test/junit-4.8.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
