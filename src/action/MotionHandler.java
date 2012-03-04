@@ -29,24 +29,31 @@ public class MotionHandler {
 			endMotionPose=170;
 			speed=3;
 			speedControl=10;
-			poseOffset=1;
+			poseOffset=2;
 
 		}else if (Motion.equalsIgnoreCase("Forwards")){
 
 			endMotionPose=66;
 			speed=3;
 			speedControl=10;
-			poseOffset=1;
+			poseOffset=2;
+			
 		}else if (Motion.equalsIgnoreCase("KickForwardRight")){
 
 			endMotionPose=61;
-			speed=2;
+			speed=3;
 			speedControl=10;
 			poseOffset=1;
+			
 
 		}else{
 
-			return "";
+			if(CurrentMotion.CurrentMotionPlaying.equalsIgnoreCase("")){
+				return "";
+			}else{
+			
+				return dnc.StopBehavior();
+			}
 		}
 
 
@@ -78,30 +85,17 @@ public class MotionHandler {
 					return dnc.Motion(Motion,pose,speedControl);
 				}
 
-
 			}
 
-
-
-
 		}else{
-			System.out.println("move change");
-			if(CurrentMotion.getInitCyrcles()<10){
-
-				int nextInit=CurrentMotion.getInitCyrcles()+1;
-				CurrentMotion.setInitCyrcles(nextInit);
-				System.out.println("init playing pose:"+CurrentMotion.getInitCyrcles());
-				return "";
-
-
-			}else{
-
+			
 				CurrentMotion.setInitCyrcles(0);
 				CurrentMotion.setCurrentMotionPlaying(Motion);
 				CurrentMotion.setStartMotionCyrcles(Current);
+				CurrentMotion.setMotionPose(0);
 
 				return "";
-			}
+			
 
 
 

@@ -283,12 +283,12 @@ public class Perceptors {
 							||message.elementAt(j).equalsIgnoreCase("b")
 							//||message.elementAt(j).equalsIgnoreCase("p")
 							);
-					System.out.println(landmarks.size());
+					//System.out.println(landmarks.size());
 					for(int jj=0;jj<landmarks.size();jj++){
 						//System.out.println("Saw landmark "+landmarks.elementAt(jj).getName());
 					}
 					k++;
-					System.out.println(k);
+					//System.out.println(k);
 					if(k>=50){
 						if(k==50){
 							//System.out.println(k);

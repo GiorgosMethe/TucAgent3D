@@ -1,7 +1,5 @@
 package agent;
-
-//import behavior.Behavior;
-//import action.Current;
+import behavior.BehaviorFactory;
 import action.MotionHandler;
 import action.CurrentMotion;
 import action.MotionTrigger;
@@ -23,7 +21,7 @@ public class Agent {
 
 		Perceptors Gp = new Perceptors();
 		SeekBall Sb = new SeekBall();
-		//Behavior Bh = new Behavior();
+		BehaviorFactory Bh = new BehaviorFactory();
 
 		String host = "127.0.0.1";
 		int port = 3100;
@@ -60,26 +58,18 @@ public class Agent {
 				MotionTrigger.setMotion("");
 				CurrentMotion.setCurrentMotionPlaying("");
 				con.sendMessage("(init(unum 1)(teamname TucAgent3D))");
-				//playerIsInit=true;
-			}
+			}			
 
 			if (i==3){
 
-				con.sendMessage("(beam 7.0 5.0 0.0)");
+				con.sendMessage("(beam 0.0 0.0 0.0)");
 			}
-
-
-
-			if(i==55){
-
-				MotionTrigger.setMotion("KickForwardRight");
-
-			}
-
-			//Bh.Act();
 
 
 			if(i>50){
+				
+				Bh.BehaviorController();
+				System.out.println(MotionTrigger.getMotion());
 				
 				con.sendMessage(Sb.MoveHead(ServerCyrcles.getCyrclesNow()));
 
