@@ -1,4 +1,4 @@
-#WEBOTS_MOTION,V1.0,
+#WEBOTS_MOTION,V1.0
 LHipYawPitch,LHipRoll,LHipPitch,LKneePitch,LAnklePitch,LAnkleRoll,RHipYawPitch,RHipRoll,RHipPitch,RKneePitch,RAnklePitch,RAnkleRoll
 00:00:000,Pose1,0,-0.02,-0.525,1.049,-0.525,0.02,0,-0.02,-0.525,1.049,-0.525,0.02
 00:00:040,Pose2,0,-0.022,-0.525,1.049,-0.525,0.022,0,-0.022,-0.525,1.049,-0.525,0.022

@@ -2,11 +2,7 @@ package action;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
-//import java.io.File;
 import java.io.FileInputStream;
-//import java.io.FileReader;
-//import java.io.FileNotFoundException;
-//import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
 
@@ -14,6 +10,8 @@ import java.util.Vector;
 import perceptor.GetNormalJointValue;
 
 public class Motions {
+
+	private int motionOffsetValues;
 
 	public String Motion(String motionName, int i, int SpeedControl) {
 
@@ -24,8 +22,18 @@ public class Motions {
 
 		GetNormalJointValue gNjV = new GetNormalJointValue();
 
-		String[] joint = MotionVector.elementAt(1).split(",");
-		String[] value = MotionVector.elementAt(i).split(",");
+		String MotionPoseSplit="";
+		
+		if(MotionVector.elementAt(0).equalsIgnoreCase("#WEBOTS_MOTION,V1.0")){
+			MotionPoseSplit=",";
+			motionOffsetValues=2;
+		}else{
+			MotionPoseSplit="%";
+			motionOffsetValues=1;
+		}
+		
+		String[] joint = MotionVector.elementAt(1).split(MotionPoseSplit);
+		String[] value = MotionVector.elementAt(i+1).split(MotionPoseSplit);
 		
 		for (int x = 0; x < joint.length; x++) {
 
@@ -78,7 +86,7 @@ public class Motions {
 			
 			
 			
-			float a=Float.valueOf(value[x+2].trim());
+			float a=Float.valueOf(value[x+motionOffsetValues].trim());
 			float a1=gNjV.Get(jointReal, a);
 
 			float a2 = (float) (a1/SpeedControl);
@@ -151,6 +159,14 @@ public class Motions {
 
 			MotionFilepath="motions/TurnRight60.motion";
 
+		}else if (motionName.equalsIgnoreCase("init")){
+
+			MotionFilepath="motions/init.motion";
+			
+		}else if (motionName.equalsIgnoreCase("KickForwardRight")){
+
+			MotionFilepath="motions/KickForwardRight.motion";
+			
 		}else{
 
 			MotionFilepath="";

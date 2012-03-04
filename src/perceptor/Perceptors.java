@@ -272,7 +272,7 @@ public class Perceptors {
 						}else if(message.elementAt(j).equalsIgnoreCase("p")){
 							j++;
 						}else{
-							System.out.println("WHAT THE FUCK!!!");
+							//System.out.println("WHAT THE FUCK!!!");
 						}
 						j++;
 						//System.out.println("aaaaaaaaaaaa    "+message.elementAt(j));
@@ -285,22 +285,22 @@ public class Perceptors {
 							);
 					System.out.println(landmarks.size());
 					for(int jj=0;jj<landmarks.size();jj++){
-						System.out.println("Saw landmark "+landmarks.elementAt(jj).getName());
+						//System.out.println("Saw landmark "+landmarks.elementAt(jj).getName());
 					}
 					k++;
 					System.out.println(k);
 					if(k>=50){
 						if(k==50){
-							System.out.println(k);
-							System.out.println(k);
-							System.out.println(k);
+							//System.out.println(k);
+							//System.out.println(k);
+							//System.out.println(k);
 						}
 					}
 
 					//Coordinate curloc=localizer.Localize(landmarks.elementAt(0).getName(),landmarks.elementAt(1).getName(),landmarks.elementAt(0).getDistance(),landmarks.elementAt(1).getDistance());
 					//System.out.println("I am  = ( "+curloc.getX()+" , "+ curloc.getY() +" )");
 					landmarks.removeAllElements();
-					System.out.println("j einai "+j);
+					//System.out.println("j einai "+j);
 					i=j;
 					j=0;
 					see=true;

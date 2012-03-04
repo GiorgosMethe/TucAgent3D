@@ -1,9 +1,6 @@
 package action;
-
-//import perceptor.Perceptors;
-//import worldState.ServerTime;
 import connection.Connection;
-import connection.ServerCyrcles;
+
 
 public class MotionHandler {
 
@@ -14,7 +11,6 @@ public class MotionHandler {
 	private int speedControl;
 	private int speed; 
 	private int poseOffset;
-	//private float time;
 
 	public MotionHandler(){
 
@@ -33,87 +29,87 @@ public class MotionHandler {
 			endMotionPose=170;
 			speed=3;
 			speedControl=10;
-			poseOffset=2;
+			poseOffset=1;
 
 		}else if (Motion.equalsIgnoreCase("Forwards")){
 
 			endMotionPose=66;
 			speed=3;
 			speedControl=10;
-			poseOffset=2;
+			poseOffset=1;
+		}else if (Motion.equalsIgnoreCase("KickForwardRight")){
 
-		}else if(Motion.equalsIgnoreCase("StopBehavior")){
-
-
-			if(!MotionTimer.getCurrentMotionPlaying().equalsIgnoreCase("StopBehavior")){
-				MotionTimer.setPoseEnding(true);
-				Str=dnc.StopBehavior();	
-
-			}else{
-				Str="";
-			}
-
-			MotionTimer.setCurrentMotionPlaying("StopBehavior");
-
+			endMotionPose=61;
+			speed=2;
+			speedControl=10;
+			poseOffset=1;
 
 		}else{
 
-			Str="";
+			return "";
 		}
 
 
-		if(Motion.equalsIgnoreCase("StopBehavior")){
+		//there is no any motion in progress
+		if(CurrentMotion.getCurrentMotionPlaying().equalsIgnoreCase("")){
+			System.out.println("there is no any motion in progress");
+			CurrentMotion.setCurrentMotionPlaying(Motion);
+			return "";
 
-		}else if(Motion.equalsIgnoreCase("")){
-		
-		}else{
+		}else if(CurrentMotion.getCurrentMotionPlaying().equalsIgnoreCase(Motion)){
+			System.out.println("play the same");
+			if((Current-CurrentMotion.getStartMotionCyrcles())%speed==0){
+				int previousPose=CurrentMotion.getMotionPose();
+				pose=previousPose+poseOffset;
+				System.out.println("current pose playing:"+pose);
+				CurrentMotion.setMotionPose(pose);
 
-			if(MotionTimer.getStartMotionCyrcles()==0){
-
-				MotionTimer.setCurrentMotionPlaying(Motion);			
-				MotionTimer.setStartMotionCyrcles(Current);			
-				MotionTimer.setEndMotionCyrcles((endMotionPose*speed)+ServerCyrcles.getCyrclesNow());
-				MotionTimer.setCurrentMotionCyrcles(Current);
-				MotionTimer.setMotionPose(0);
-
-			}else{
-
-				MotionTimer.setCurrentMotionCyrcles(ServerCyrcles.getCyrclesNow());
-			}
-			
-			if(Current<MotionTimer.getEndMotionCyrcles()) {
-
-				if((Current-MotionTimer.getStartMotionCyrcles())%speed==0){
-
-					int previousPose=MotionTimer.getMotionPose();
-					pose=previousPose+poseOffset;
-
-
-					if (pose > endMotionPose){
-						MotionTimer.setPoseEnding(true);
-						MotionTimer.setCurrentMotionPlaying("StopBehavior");			
-						MotionTimer.setStartMotionCyrcles(0);			
-						MotionTimer.setEndMotionCyrcles(0);
-						MotionTimer.setCurrentMotionCyrcles(0);
-						MotionTimer.setMotionPose(0);
-						Str= "";
-					}else{
-						Str=dnc.Motion(Motion,pose,speedControl);
-						MotionTimer.setMotionPose(pose);
-					}
+				if (pose >= endMotionPose){
+					CurrentMotion.setPoseEnding(true);		
+					CurrentMotion.setStartMotionCyrcles(0);			
+					CurrentMotion.setEndMotionCyrcles(0);
+					CurrentMotion.setCurrentMotionCyrcles(0);
+					CurrentMotion.setMotionPose(0);
+					MotionTrigger.setMotion("");
+					return dnc.StopBehavior();
 
 				}else{
-					Str="";
+					CurrentMotion.setMotionPose(pose);
+					return dnc.Motion(Motion,pose,speedControl);
 				}
 
-			}else{
-				
-				return "";
-				
+
 			}
+
+
+
+
+		}else{
+			System.out.println("move change");
+			if(CurrentMotion.getInitCyrcles()<10){
+
+				int nextInit=CurrentMotion.getInitCyrcles()+1;
+				CurrentMotion.setInitCyrcles(nextInit);
+				System.out.println("init playing pose:"+CurrentMotion.getInitCyrcles());
+				return "";
+
+
+			}else{
+
+				CurrentMotion.setInitCyrcles(0);
+				CurrentMotion.setCurrentMotionPlaying(Motion);
+				CurrentMotion.setStartMotionCyrcles(Current);
+
+				return "";
+			}
+
+
+
+
 		}
-		
 		return Str;
+
+
 	}
 
 

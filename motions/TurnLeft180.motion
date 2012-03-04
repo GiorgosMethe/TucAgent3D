@@ -1,4 +1,4 @@
-#WEBOTS_MOTION,V1.0,
+#WEBOTS_MOTION,V1.0
 LShoulderPitch,LShoulderRoll,LElbowYaw,LElbowRoll,LHipYawPitch,LHipRoll,LHipPitch,LKneePitch,LAnklePitch,LAnkleRoll,RHipYawPitch,RHipRoll,RHipPitch,RKneePitch,RAnklePitch,RAnkleRoll,RShoulderPitch,RShoulderRoll,RElbowYaw,RElbowRoll
 00:00:000,Pose1,1.745,0.349,-1.396,-1.396,0,-0.012,-0.525,1.05,-0.525,0.012,0,-0.012,-0.525,1.05,-0.525,0.012,1.745,-0.349,1.396,1.396
 00:00:040,Pose2,1.745,0.349,-1.396,-1.396,0,-0.01,-0.525,1.05,-0.525,0.01,0,-0.009,-0.525,1.05,-0.525,0.009,1.745,-0.349,1.396,1.396
