@@ -1,15 +1,46 @@
 package behavior;
 
+import action.TurnToBall;
+import perceptor.Ball;
+import perceptor.Vision;
+
 public class BehaviorFactory {
 
 
-	SimpleBehavior Bh=new SimpleBehavior();
+	
+
 
 	public void BehaviorController(){
+		
+		System.out.println(""+BehaviorStateMachine.getState());
 
-		if(BehaviorDone.isBehaviorDone()!=true){
-			Bh.Act();
+		if(BehaviorStateMachine.getName().equalsIgnoreCase("simpleBehavior")){
+			
+			if(BehaviorStateMachine.getState().equalsIgnoreCase("startup")){
+				
+				if(Vision.isiSee()==true){
+					
+					if(Ball.isSeeTheBall()==true){
+						BehaviorStateMachine.setState("iseetheball");
+					}
+				}
+				
+			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("iseetheball")){
+				
+				if(BehaviorDone.isBehaviorDone()!=true){
+					TurnToBall.Act();
+					
+				}
+				
+				
+				
+			}
+			
+
+			
 		}
+		
+		
 	}
 
 	

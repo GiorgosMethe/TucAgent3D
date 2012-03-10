@@ -1,5 +1,7 @@
 package agent;
+import localization.BallPosition;
 import behavior.BehaviorFactory;
+import behavior.BehaviorStateMachine;
 import action.MotionHandler;
 import action.CurrentMotion;
 import action.MotionTrigger;
@@ -22,6 +24,7 @@ public class Agent {
 		Perceptors Gp = new Perceptors();
 		SeekBall Sb = new SeekBall();
 		BehaviorFactory Bh = new BehaviorFactory();
+		new BehaviorStateMachine("simpleBehavior","startup");
 
 		String host = "127.0.0.1";
 		int port = 3100;
@@ -52,17 +55,18 @@ public class Agent {
 
 			i++;
 			Gp.GetPerceptors(con);
+			BallPosition.WhereIsTheBall();
 			ServerCyrcles.setCyrclesNow(i);
 
 			if (i==2){
 				MotionTrigger.setMotion("");
 				CurrentMotion.setCurrentMotionPlaying("");
-				con.sendMessage("(init(unum 1)(teamname TucAgent3D))");
+				con.sendMessage("(init(unum 2)(teamname TucAgent3D))");
 			}			
 
 			if (i==3){
 
-				con.sendMessage("(beam 0.0 0.0 0.0)");
+				con.sendMessage("(beam 1.0 0.2 0.0)");
 			}
 
 

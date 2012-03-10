@@ -38,9 +38,28 @@ public class MotionHandler {
 			speedControl=10;
 			poseOffset=2;
 			
+		}else if (Motion.equalsIgnoreCase("TurnRight40")){
+
+			endMotionPose=72;
+			speed=3;
+			speedControl=10;
+			poseOffset=2;
+		}else if (Motion.equalsIgnoreCase("TurnLeft40")){
+
+			endMotionPose=72;
+			speed=3;
+			speedControl=10;
+			poseOffset=2;
 		}else if (Motion.equalsIgnoreCase("KickForwardRight")){
 
 			endMotionPose=61;
+			speed=3;
+			speedControl=10;
+			poseOffset=1;
+			
+		}else if (Motion.equalsIgnoreCase("leftFall")){
+
+			endMotionPose=9;
 			speed=3;
 			speedControl=10;
 			poseOffset=1;

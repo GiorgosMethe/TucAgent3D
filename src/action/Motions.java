@@ -166,6 +166,10 @@ public class Motions {
 		}else if (motionName.equalsIgnoreCase("KickForwardRight")){
 
 			MotionFilepath="motions/KickForwardRight.motion";
+		
+		}else if (motionName.equalsIgnoreCase("leftFall")){
+
+			MotionFilepath="motions/leftFall.motion";
 			
 		}else{
 
