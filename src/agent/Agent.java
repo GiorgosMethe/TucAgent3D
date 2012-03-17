@@ -24,7 +24,7 @@ public class Agent {
 		Perceptors Gp = new Perceptors();
 		SeekBall Sb = new SeekBall();
 		BehaviorFactory Bh = new BehaviorFactory();
-		new BehaviorStateMachine("simpleBehavior","startup");
+		new BehaviorStateMachine("doNothing","start");
 
 		String host = "127.0.0.1";
 		int port = 3100;
@@ -66,14 +66,14 @@ public class Agent {
 
 			if (i==3){
 
-				con.sendMessage("(beam 0.0 0.0 0.0)");
+				con.sendMessage("(beam 10.0 5.0 180.0)");
 			}
 
 
 			if(i>50){
-				MotionTrigger.setMotion("TurnRight40");
+				//MotionTrigger.setMotion("TurnRight40");
 				
-				//Bh.BehaviorController();
+				Bh.BehaviorController();
 				System.out.println(MotionTrigger.getMotion());
 				
 				con.sendMessage(Sb.MoveHead(ServerCyrcles.getCyrclesNow()));

@@ -1,4 +1,5 @@
 package action;
+import behavior.BehaviorDone;
 import connection.Connection;
 
 
@@ -78,16 +79,16 @@ public class MotionHandler {
 
 		//there is no any motion in progress
 		if(CurrentMotion.getCurrentMotionPlaying().equalsIgnoreCase("")){
-			System.out.println("there is no any motion in progress");
+			//System.out.println("there is no any motion in progress");
 			CurrentMotion.setCurrentMotionPlaying(Motion);
 			return "";
 
 		}else if(CurrentMotion.getCurrentMotionPlaying().equalsIgnoreCase(Motion)){
-			System.out.println("play the same");
+			//System.out.println("play the same");
 			if((Current-CurrentMotion.getStartMotionCyrcles())%speed==0){
 				int previousPose=CurrentMotion.getMotionPose();
 				pose=previousPose+poseOffset;
-				System.out.println("current pose playing:"+pose);
+				//System.out.println("current pose playing:"+pose);
 				CurrentMotion.setMotionPose(pose);
 
 				if (pose >= endMotionPose){
@@ -97,6 +98,7 @@ public class MotionHandler {
 					CurrentMotion.setCurrentMotionCyrcles(0);
 					CurrentMotion.setMotionPose(0);
 					MotionTrigger.setMotion("");
+					BehaviorDone.setBehaviorDone(false);
 					return dnc.StopBehavior();
 
 				}else{
