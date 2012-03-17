@@ -14,9 +14,11 @@ public class BallPosition {
 		distance=BallPosition.getDistance();
 		angle=BallPosition.getAngle();
 
+
+
 	}
 
-	public static void WhereIsTheBall(){
+	public static BallPosition WhereIsTheBall(){
 
 		float angleX=Ball.getAngleX();
 		//float angleY=Ball.getAngleY();
@@ -25,14 +27,21 @@ public class BallPosition {
 		float HeadxTheta=HingeJointPerceptor.getHj1();
 		//float HeadyTheta=HingeJointPerceptor.getHj2();
 
+
+
 		if(iSeeBall==true){
+
 
 			float HeadxThetaDeg=(float) Math.toDegrees(HeadxTheta);
 			float realAngleFromBody=HeadxThetaDeg + angleX;
 			
-			BallPosition.setDistance(Bodydistance);
-			BallPosition.setAngle(realAngleFromBody);
+			BallPosition BallPos = new BallPosition(Bodydistance, realAngleFromBody);
+			return BallPos;
 
+
+		}else{
+			
+			return null;
 		}
 	}
 

@@ -4,7 +4,7 @@ import java.util.Vector;
 
 import javax.vecmath.Vector3d;
 
-import localization.Landmark;
+import localization.*;
 
 //import org.apache.commons.math.geometry.Vector3D;
 
@@ -14,7 +14,7 @@ import worldState.ServerTime;
 import worldState.GameState;
 
 public class Perceptors {
-
+	Coordinate curloc=new Coordinate(0, 0);
 	public Perceptors() {
 
 	}
@@ -23,6 +23,9 @@ public class Perceptors {
 
 		Vector<String> message = con.GetVector();
 		Vector<Landmark> landmarks = new Vector<Landmark>();
+		Vector<Landmark> coplayers = new Vector<Landmark>();
+		Vector<Landmark> rivals = new Vector<Landmark>();
+		TriangleLocalization localizer = new TriangleLocalization();
 		// print message from server
 
 		boolean iSeeTheBall = false;
@@ -215,10 +218,6 @@ public class Perceptors {
 					j=i;
 					j++;
 					do{
-
-
-
-
 						if(message.elementAt(j).equalsIgnoreCase("f1l")){
 							Landmark lm=new Landmark("f1l", Float.parseFloat(message.elementAt(j+2).toString()),Float.parseFloat(message.elementAt(j+4).toString()), Float.parseFloat(message.elementAt(j+3).toString()));
 							landmarks.add(lm);
@@ -252,7 +251,7 @@ public class Perceptors {
 							Landmark lm=new Landmark("g2r", Float.parseFloat(message.elementAt(j+2).toString()),Float.parseFloat(message.elementAt(j+4).toString()), Float.parseFloat(message.elementAt(j+3).toString()));
 							landmarks.add(lm);
 							j=j+4;
-							
+
 						}
 						else if(message.elementAt(j).equalsIgnoreCase("b")){
 
@@ -271,43 +270,129 @@ public class Perceptors {
 							j=j+4;
 						}else if(message.elementAt(j).equalsIgnoreCase("p")){
 							j++;
+							String team_name=null;
+							String player_id=null;
+							double player_distance=0;
+							double player_horizontal_angle=0;
+							double player_vertical_angle=0;
+							j++;
+							team_name=message.elementAt(j);
+							j++; //message=id
+							j++;
+							player_id=message.elementAt(j);
+							j++;
+							int k=0;
+							while(message.elementAt(j).equalsIgnoreCase("head")||message.elementAt(j).equalsIgnoreCase("rlowerarm")
+									||message.elementAt(j).equalsIgnoreCase("llowerarm")||message.elementAt(j).equalsIgnoreCase("rfoot")
+									||message.elementAt(j).equalsIgnoreCase("lfoot")){
+								k++;
+								j++; //message=pol
+								j++;
+								player_distance=player_distance+Float.parseFloat(message.elementAt(j));
+								j++;
+								player_horizontal_angle=player_horizontal_angle+Float.parseFloat(message.elementAt(j));
+								j++;
+								player_vertical_angle=player_horizontal_angle+Float.parseFloat(message.elementAt(j));
+								j++;
+							}
+							j--;
+							if(k!=0){
+								player_distance=player_distance/k;
+								player_horizontal_angle=player_horizontal_angle/k;
+								player_vertical_angle=player_horizontal_angle;	
+							}
+							Landmark player=new Landmark(player_id, player_distance, player_vertical_angle, player_horizontal_angle);
+							if(team_name.equalsIgnoreCase("TucAgent3D")){
+								coplayers.add(player);
+							}else{
+								rivals.add(player);
+							}
+
+
+
+
+
 						}else{
 							//System.out.println("WHAT THE FUCK!!!");
 						}
 						j++;
-						//System.out.println("aaaaaaaaaaaa    "+message.elementAt(j));
+
 					}while (message.elementAt(j).equalsIgnoreCase("f1l")||message.elementAt(j).equalsIgnoreCase("f2l")||
 							message.elementAt(j).equalsIgnoreCase("f2r")||message.elementAt(j).equalsIgnoreCase("f1r")||
 							message.elementAt(j).equalsIgnoreCase("g1l")||message.elementAt(j).equalsIgnoreCase("g2l")||
-							message.elementAt(j).equalsIgnoreCase("g1r")||message.elementAt(j).equalsIgnoreCase("g2r")
-							||message.elementAt(j).equalsIgnoreCase("b")
-							//||message.elementAt(j).equalsIgnoreCase("p")
+							message.elementAt(j).equalsIgnoreCase("g1r")||message.elementAt(j).equalsIgnoreCase("g2r")||
+							message.elementAt(j).equalsIgnoreCase("b")||message.elementAt(j).equalsIgnoreCase("p")
 							);
-					//System.out.println(landmarks.size());
-					for(int jj=0;jj<landmarks.size();jj++){
-						//System.out.println("Saw landmark "+landmarks.elementAt(jj).getName());
-					}
-					k++;
-					//System.out.println(k);
-					if(k>=50){
-						if(k==50){
-							//System.out.println(k);
-							//System.out.println(k);
-							//System.out.println(k);
+					Coordinate loc_buffer=new Coordinate(0, 0);
+
+					int k=0;
+					double x=0;
+					double y=0;
+					for(int ii=0;ii<landmarks.size();ii++){
+						for(int jj=ii+1;jj<landmarks.size();jj++){
+							loc_buffer=localizer.Localize(landmarks.elementAt(ii),landmarks.elementAt(jj));
+							x=x+loc_buffer.X;
+							y=y+loc_buffer.Y;
+							k++;
 						}
 					}
-
-					//Coordinate curloc=localizer.Localize(landmarks.elementAt(0).getName(),landmarks.elementAt(1).getName(),landmarks.elementAt(0).getDistance(),landmarks.elementAt(1).getDistance());
+					if(x!=0 && y!=0){
+						if(k!=0){
+							curloc=new Coordinate(x/k, y/k);
+						}
+						else{
+							curloc=new Coordinate(x, y);
+						}
+					}
 					//System.out.println("I am  = ( "+curloc.getX()+" , "+ curloc.getY() +" )");
+					int l=0;
+					double angle_buffer=0;
+					double angle=0;
+					for (int ii=0;ii<landmarks.size();ii++){
+						angle_buffer=localizer.universal_angle(landmarks.elementAt(ii), curloc);
+						angle=angle+angle_buffer;
+						l++;
+						//System.out.println(" angle====="+angle);//+"\n landmark=="+landmarks.elementAt(ii).getName()+"\n distance=="+landmarks.elementAt(ii).getDistance()+"\n hor_angle=="+landmarks.elementAt(ii).getHorizontal_Angle());
+					}
+					double head_angle=0;
+					if(angle!=0){
+						if(l!=0){
+							head_angle=angle/l;
+						}else{
+							head_angle=angle;
+						}
+					}
+					//System.out.println("I look at "+head_angle+" degrees");
+					//System.out.println("My body looks at " + (head_angle+HingeJointPerceptor.getHj1()));
+					Coordinate Ball_det=localizer.get_det_with_distance_angle(curloc.getX(), curloc.getY(), (head_angle+Ball.getAngleX()), Ball.getDistance());
+					for(int jj=0;jj<coplayers.size();jj++){
+						Coordinate found_player=localizer.get_det_with_distance_angle(curloc.getX(),curloc.getY() , (head_angle+coplayers.elementAt(jj).getHorizontal_Angle()), coplayers.elementAt(jj).getDistance());
+						//System.out.println("i see teammate with id ( "+ coplayers.elementAt(jj).getName()+" ) at distance ( "+coplayers.elementAt(jj).getDistance()+" ) at angle "+coplayers.elementAt(jj).getHorizontal_Angle());
+						//System.out.println("and see him at ( "+found_player.getX()+" , "+found_player.getY()+" )");
+					}
+					if(coplayers.size()==0){
+						//System.out.println("I see no teammates");
+					}
+					for(int jj=0;jj<rivals.size();jj++){
+						Coordinate found_player=localizer.get_det_with_distance_angle(curloc.getX(),curloc.getY() , (head_angle+rivals.elementAt(jj).getHorizontal_Angle()), rivals.elementAt(jj).getDistance());
+						//System.out.println("i see rival with id ( "+ rivals.elementAt(jj).getName()+" ) at distance ( "+rivals.elementAt(jj).getDistance()+" ) at angle "+rivals.elementAt(jj).getHorizontal_Angle());
+						//System.out.println("and see him at ( "+found_player.getX()+" , "+found_player.getY()+" )");
+					}
+					if(rivals.size()==0){
+						//System.out.println("I see no rivals");
+					}
+					//System.out.println("I see ball at ( "+Ball_det.getX()+" , "+Ball_det.getY()+" ) at angle "+ Ball.getDistance());
+					//System.out.println("-------------------------------------------------------------------------------------------");
+					coplayers.removeAllElements();
+					rivals.removeAllElements();
 					landmarks.removeAllElements();
-					//System.out.println("j einai "+j);
 					i=j;
 					j=0;
 					see=true;
 					Vision.setiSee(see);
 					// System.out.println("see perceptor @ "+i);
 					//i = i + 1;
-					
+
 				} else if (message.elementAt(i).equalsIgnoreCase("FRP")) {
 
 					ForceResistancePerceptor.setName(message.elementAt(i+2).toString());

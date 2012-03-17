@@ -61,23 +61,23 @@ public class Agent {
 			if (i==2){
 				MotionTrigger.setMotion("");
 				CurrentMotion.setCurrentMotionPlaying("");
-				con.sendMessage("(init(unum 2)(teamname TucAgent3D))");
+				con.sendMessage("(init(unum 1)(teamname TucAgent3D))");
 			}			
 
 			if (i==3){
 
-				con.sendMessage("(beam 1.0 0.2 0.0)");
+				con.sendMessage("(beam 0.0 0.0 0.0)");
 			}
 
 
 			if(i>50){
 				
-				Bh.BehaviorController();
+				//Bh.BehaviorController();
 				System.out.println(MotionTrigger.getMotion());
 				
 				con.sendMessage(Sb.MoveHead(ServerCyrcles.getCyrclesNow()));
 
-				con.sendMessage( dnc.MotionFactory(MotionTrigger.getMotion(),ServerCyrcles.getCyrclesNow()));
+				//con.sendMessage( dnc.MotionFactory(MotionTrigger.getMotion(),ServerCyrcles.getCyrclesNow()));
 
 
 			}
