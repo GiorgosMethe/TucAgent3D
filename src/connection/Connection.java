@@ -120,7 +120,7 @@ public class Connection {
 			System.out.println("Error writing to socket, shuting down...");
 		}
 
-		//System.out.println("Sent: " + msg);
+		System.out.println("Sent: " + msg);
 	}
 
 	public void startReceiveLoop() {

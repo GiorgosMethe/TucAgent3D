@@ -6,15 +6,11 @@ import perceptor.Vision;
 
 public class BehaviorFactory {
 
-
-	
-
-
 	public void BehaviorController(){
 		
 		System.out.println(""+BehaviorStateMachine.getState());
 
-		if(BehaviorStateMachine.getName().equalsIgnoreCase("simpleBehavior")){
+		if(BehaviorStateMachine.getName().equalsIgnoreCase("GoKickBall")){
 			
 			if(BehaviorStateMachine.getState().equalsIgnoreCase("startup")){
 				

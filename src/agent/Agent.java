@@ -49,7 +49,7 @@ public class Agent {
 		}
 
 		int i=0;
-		//MotionTrigger.setMotion("Forwards50");
+		
 		while(con.isConnected()){
 
 
@@ -71,13 +71,14 @@ public class Agent {
 
 
 			if(i>50){
+				MotionTrigger.setMotion("TurnRight40");
 				
 				//Bh.BehaviorController();
 				System.out.println(MotionTrigger.getMotion());
 				
 				con.sendMessage(Sb.MoveHead(ServerCyrcles.getCyrclesNow()));
 
-				//con.sendMessage( dnc.MotionFactory(MotionTrigger.getMotion(),ServerCyrcles.getCyrclesNow()));
+				con.sendMessage( dnc.MotionFactory(MotionTrigger.getMotion(),ServerCyrcles.getCyrclesNow()));
 
 
 			}

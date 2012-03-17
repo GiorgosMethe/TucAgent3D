@@ -2,36 +2,81 @@ package action;
 
 import perceptor.Ball;
 import perceptor.GetNormalJointValue;
+import perceptor.HingeJointPerceptor;
 import perceptor.Vision;
 
 
 public class SeekBall {
-	
+
 	GetNormalJointValue gNjV = new GetNormalJointValue();
-	
+
 	public String MoveHead(int cycle){
-		
-		float moveX=(float) (2.09*Math.sin(cycle/25));
+
+		float moveX=(float) (2.09*Math.sin(cycle/15));
 		float moveY= (float) (0.59*Math.sin(cycle/8)-0.078);
 		String str="";
-		
+		String strX="";
+		String strY="";
+
 		if(Vision.isiSee()==true){
-			
+
 			if(Ball.isSeeTheBall()==true){
-			
-				str="("+"he1"+" "+0.0f+")"+"("+"he2"+" "+0.0f+")";	
-			
+
+				str="("+"he1"+" "+centerTheBallX()+")"+"("+"he2"+" "+centerTheBallY()+")";			
+
 			}else{
-				float realMoveX=gNjV.Get("he1", moveX)/2;
-				float realMoveY=gNjV.Get("he2", moveY)/2;
+				float realMoveX=gNjV.Get("he1", moveX)/5;
+				float realMoveY=gNjV.Get("he2", moveY)/5;
 				str="("+"he1"+" "+realMoveX+")"+"("+"he2"+" "+realMoveY+")";
 			}
 			
+			
+
 		}
-		
+
 		return str;
-		
-		
+
+
 	}
+
+	public float centerTheBallX(){
+		float x = 0;
+		if(Math.abs(HingeJointPerceptor.getHj1())<115){
+
+			if(Ball.getAngleX()>5){
+				x = 1;
+			}
+			if(Ball.getAngleX()<-5){
+				x = -1;
+			}
+
+
+		}else{					
+						
+		}
+		return x;
+	}
+	
+	public float centerTheBallY(){
+		float x = 0;
+		if(Math.abs(HingeJointPerceptor.getHj2())<45){
+
+			if(Ball.getAngleY()>5){
+				x = 1;
+			}
+			if(Ball.getAngleY()<-5){
+				x = -1;
+			}
+
+
+		}else{					
+						
+		}
+		return x;
+	}
+	
+		
+	
+	
 	
 }
