@@ -48,4 +48,13 @@ public class Ball {
 		Ball.angleY = angleY;
 	}
 	
+	public static String isKickable(){
+		
+		if(Ball.distance<2){
+			return "right";
+		}
+	
+		return "notKickable";
+	}
+	
 }

@@ -1,59 +1,75 @@
 package behavior;
 
+import action.GetKickablePosition;
+import action.TurnToBall;
 import action.TurnToSeeBall;
+import action.WalkToBall;
 import perceptor.Ball;
 import perceptor.Vision;
 
 public class BehaviorFactory {
 
-	TurnToSeeBall bh=new TurnToSeeBall();
-	
+	TurnToSeeBall tTsB=new TurnToSeeBall();
+	TurnToBall tTb=new TurnToBall();
+	WalkToBall wTb=new WalkToBall();
+	GetKickablePosition gKp=new GetKickablePosition();
+
 	public void BehaviorController(){
-		
+
 		System.out.println(""+BehaviorStateMachine.getState());
 
-		if(BehaviorStateMachine.getName().equalsIgnoreCase("doNothing")){
+		if(BehaviorStateMachine.getName().equalsIgnoreCase("goKickTheBall")){
 
-			
-			
-			
 			if(BehaviorStateMachine.getState().equalsIgnoreCase("start")){
 
 				if(Vision.isiSee()==true){
 
 					if(Ball.isSeeTheBall()==true){
-						
+
 						BehaviorStateMachine.setState("iSeeBall");
-						
+
 					}else{
-						
+
 						BehaviorStateMachine.setState("NotSeeBall");
-						
+
 					}
-					
+
 				}else{
-					
+
 					BehaviorStateMachine.setState("start");
-					
+
 				}
 
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("iSeeBall")){
 
-				if(BehaviorDone.isBehaviorDone()!=true){
-					bh.Act();					
-				}
-				BehaviorStateMachine.setState("start");
-				
+				tTb.Act();
+				BehaviorStateMachine.setState("walkToBall");
+
 
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("NotSeeBall")){
-				
-				if(BehaviorDone.isBehaviorDone()!=true){
-					bh.Act();	
-				}
-				BehaviorStateMachine.setState("start");
-				
-				
 
+
+				tTsB.Act();					
+
+				BehaviorStateMachine.setState("start");
+
+			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("walkToBall")){
+
+				if(Ball.getDistance()>0.5){
+				wTb.Act();
+				BehaviorStateMachine.setState("walkToBall");
+				}else{
+					
+					BehaviorStateMachine.setState("iReachTheBall");
+					
+					
+				}
+
+			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("iReachTheBall")){
+				
+				gKp.Act();
+	
+				
 			}
 
 

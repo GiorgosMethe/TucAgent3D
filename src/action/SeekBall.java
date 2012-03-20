@@ -21,27 +21,20 @@ public class SeekBall {
 		if(Vision.isiSee()==true){
 
 			if(Ball.isSeeTheBall()==true){
-
 				str="("+"he1"+" "+centerTheBallX()+")"+"("+"he2"+" "+centerTheBallY()+")";			
-
 			}else{
 				float realMoveX=gNjV.Get("he1", moveX)/5;
 				float realMoveY=gNjV.Get("he2", moveY)/5;
 				str="("+"he1"+" "+realMoveX+")"+"("+"he2"+" "+realMoveY+")";
 			}
-			
-			
 
 		}
-
 		return str;
-
-
 	}
 
 	public float centerTheBallX(){
 		float x = 0;
-		if(Math.abs(HingeJointPerceptor.getHj1())<115){
+		if(Math.abs(HingeJointPerceptor.getHj1())<125){
 
 			if(Ball.getAngleX()>5){
 				x = 1;
@@ -49,8 +42,6 @@ public class SeekBall {
 			if(Ball.getAngleX()<-5){
 				x = -1;
 			}
-
-
 		}else{					
 						
 		}
@@ -67,8 +58,6 @@ public class SeekBall {
 			if(Ball.getAngleY()<-5){
 				x = -1;
 			}
-
-
 		}else{					
 						
 		}

@@ -27,7 +27,7 @@ public class MotionHandler {
 
 		if (Motion.equalsIgnoreCase("Forwards50")){
 
-			endMotionPose=170;
+			endMotionPose=171;
 			speed=3;
 			speedControl=10;
 			poseOffset=2;
@@ -65,6 +65,19 @@ public class MotionHandler {
 			speedControl=10;
 			poseOffset=1;
 			
+		}else if (Motion.equalsIgnoreCase("Aerobic")){
+
+			endMotionPose=10;
+			speed=3;
+			speedControl=10;
+			poseOffset=1;
+			
+		}else if (Motion.equalsIgnoreCase("AldebaranFront")){
+
+			endMotionPose=14;
+			speed=10;
+			speedControl=15;
+			poseOffset=1;
 
 		}else{
 

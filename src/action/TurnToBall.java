@@ -1,5 +1,6 @@
 package action;
 
+import perceptor.HingeJointPerceptor;
 import behavior.BehaviorDone;
 import localization.BallPosition;
 
@@ -8,26 +9,23 @@ public class TurnToBall {
 	
 	public void Act(){
 		
-		float angleFromBall=BallPosition.getAngle();
-		
-		if (angleFromBall>40){
+		if(Math.abs((HingeJointPerceptor.getHj1()+BallPosition.getAngle()))>20){
 			
-			MotionTrigger.setMotion("TurnRight40");
+			if(HingeJointPerceptor.getHj1()>0){
+				MotionTrigger.setMotion("TurnLeft40");
+				
+			}else{
+				MotionTrigger.setMotion("TurnRight40");
+				
+			}
 			
 			
-		}else{
-			
-			MotionTrigger.setMotion("");
-			BehaviorDone.setBehaviorDone(true);
-		}
-		
-		
+	}else{
 		
 		
 	}
 	
-	
-	
+	}
 	
 
 }

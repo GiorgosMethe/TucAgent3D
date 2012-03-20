@@ -171,6 +171,14 @@ public class Motions {
 
 			MotionFilepath="motions/leftFall.motion";
 			
+		}else if (motionName.equalsIgnoreCase("Aerobic")){
+
+			MotionFilepath="motions/Aerobic.motion";
+			
+		}else if (motionName.equalsIgnoreCase("AldebaranFront")){
+
+			MotionFilepath="motions/AldebaranFront.motion";
+			
 		}else{
 
 			MotionFilepath="";
