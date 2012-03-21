@@ -45,6 +45,14 @@ public class MotionHandler {
 			speed=3;
 			speedControl=10;
 			poseOffset=2;
+			
+		}else if (Motion.equalsIgnoreCase("Forwards100")){
+
+			endMotionPose=150;
+			speed=3;
+			speedControl=10;
+			poseOffset=1;
+			
 		}else if (Motion.equalsIgnoreCase("TurnLeft40")){
 
 			endMotionPose=72;

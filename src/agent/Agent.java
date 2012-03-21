@@ -77,8 +77,8 @@ public class Agent {
 				
 				con.sendMessage(Sb.MoveHead(ServerCyrcles.getCyrclesNow()));
 
-				con.sendMessage( dnc.MotionFactory(MotionTrigger.getMotion(),ServerCyrcles.getCyrclesNow()));
-
+				//con.sendMessage( dnc.MotionFactory(MotionTrigger.getMotion(),ServerCyrcles.getCyrclesNow()));
+				con.sendMessage( dnc.MotionFactory("Forwards100",ServerCyrcles.getCyrclesNow()));
 			}
 
 		}
