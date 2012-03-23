@@ -1,14 +1,8 @@
 package perceptor;
 
 import java.util.Vector;
-
 import javax.vecmath.Vector3d;
-
 import localization.*;
-
-//import org.apache.commons.math.geometry.Vector3D;
-
-//import org.apache.commons.math.geometry.Vector3D;
 import connection.Connection;
 import worldState.ServerTime;
 import worldState.GameState;

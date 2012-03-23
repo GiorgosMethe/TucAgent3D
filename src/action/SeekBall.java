@@ -1,5 +1,6 @@
 package action;
 
+import connection.ServerCyrcles;
 import perceptor.Ball;
 import perceptor.GetNormalJointValue;
 import perceptor.HingeJointPerceptor;
@@ -10,13 +11,13 @@ public class SeekBall {
 
 	GetNormalJointValue gNjV = new GetNormalJointValue();
 
-	public String MoveHead(int cycle){
+	public String MoveHead(){
 
-		float moveX=(float) (2.09*Math.sin(cycle/15));
-		float moveY= (float) (0.59*Math.sin(cycle/8)-0.078);
+		
+		int cycles=ServerCyrcles.getCyrclesNow();
+		float moveX=(float) (2.09*Math.sin(cycles/15));
+		float moveY= (float) (0.59*Math.sin(cycles/8)-0.078);
 		String str="";
-		String strX="";
-		String strY="";
 
 		if(Vision.isiSee()==true){
 

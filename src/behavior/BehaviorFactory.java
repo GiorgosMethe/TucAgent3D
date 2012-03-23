@@ -1,6 +1,5 @@
 package behavior;
 
-import action.CurrentMotion;
 import action.GetKickablePosition;
 import action.TurnToBall;
 import action.TurnToSeeBall;

@@ -1,6 +1,7 @@
 package action;
 import behavior.BehaviorDone;
 import connection.Connection;
+import connection.ServerCyrcles;
 
 
 public class MotionController {
@@ -18,8 +19,9 @@ public class MotionController {
 
 	}
 
-	public String MotionFactory(String Motion, int Current){
+	public String MotionFactory(String Motion){
 
+		int Current=ServerCyrcles.getCyrclesNow();
 		int pose=0;
 		Str="";
 		Motions dnc=new Motions();
