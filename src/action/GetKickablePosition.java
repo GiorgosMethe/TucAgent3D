@@ -4,10 +4,7 @@ public class GetKickablePosition {
 	
 	public void Act(){
 		
-		MotionTrigger.setMotion("KickForwardRight");
-		
-		
-		
+		MotionTrigger.setMotion("KickForwardRight");	
 		
 	}
 

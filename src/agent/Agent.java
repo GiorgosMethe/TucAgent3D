@@ -1,8 +1,9 @@
 package agent;
 import localization.BallPosition;
+import behavior.BehaviorDone;
 import behavior.BehaviorFactory;
 import behavior.BehaviorStateMachine;
-import action.MotionHandler;
+import action.MotionController;
 import action.CurrentMotion;
 import action.MotionTrigger;
 import action.SeekBall;
@@ -32,13 +33,15 @@ public class Agent {
 		//initializes the connection
 		Connection con = new Connection(host,port);
 
+		BehaviorDone.setName("");
+		BehaviorDone.setBehaviorDone(true);
 		boolean isConnected = false;
 
 		//boolean playerIsInit=false;
 
 		//establish the connection between agent and server
 		isConnected = con.establishConnection();
-		MotionHandler dnc=new MotionHandler();
+		MotionController dnc=new MotionController();
 
 		//Creation of Nao robot
 		if(isConnected==true){
@@ -61,24 +64,24 @@ public class Agent {
 			if (i==2){
 				MotionTrigger.setMotion("");
 				CurrentMotion.setCurrentMotionPlaying("");
-				con.sendMessage("(init(unum 1)(teamname TucAgent3D))");
+				con.sendMessage("(init(unum 1)(teamname Agent3D))");
 			}			
 
 			if (i==3){
 
-				con.sendMessage("(beam 10.0 0.0 180.0)");
+				con.sendMessage("(beam 0.0 0.0 90.0)");
 			}
+			//initJoints
 
 
 			if(i>50){
 				
 				Bh.BehaviorController();
-				System.out.println(MotionTrigger.getMotion());
-				
+				System.out.println(MotionTrigger.getMotion());			
 				con.sendMessage(Sb.MoveHead(ServerCyrcles.getCyrclesNow()));
-
-				//con.sendMessage( dnc.MotionFactory(MotionTrigger.getMotion(),ServerCyrcles.getCyrclesNow()));
-				con.sendMessage( dnc.MotionFactory("Forwards100",ServerCyrcles.getCyrclesNow()));
+				con.sendMessage( dnc.MotionFactory(MotionTrigger.getMotion(),ServerCyrcles.getCyrclesNow()));
+				
+				
 			}
 
 		}
