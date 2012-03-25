@@ -48,13 +48,14 @@ public class Ball {
 		Ball.angleY = angleY;
 	}
 	
-	public static String isKickable(){
-		
-		if(Ball.distance<2){
-			return "right";
+	public static boolean isKickable(){
+		if(HingeJointPerceptor.getHj1()<-15 && HingeJointPerceptor.getHj1()>-17){
+			return true;
+		}else{
+			return false;
 		}
-	
-		return "notKickable";
+		
+		
 	}
 	
 }

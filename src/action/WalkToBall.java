@@ -22,7 +22,7 @@ public class WalkToBall {
 				
 		}else{
 			
-			MotionTrigger.setMotion("Forwards");
+			MotionTrigger.setMotion("Forwards50");
 			
 		}
 		

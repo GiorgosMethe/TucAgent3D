@@ -47,11 +47,11 @@ public class Agent {
 		int i=0;
 
 		//player number
-		int num=4;
+		int num=1;
 		// team name
-		String Teamname="Opponents";
+		String Teamname="AustinVilla";
 		//player position
-		String beamX="-9.0";
+		String beamX="-4.0";
 		String beamY="0.0";
 		String beamTheta="0.0";
 		String beam=beamX+" "+beamY+" "+beamTheta;
@@ -68,7 +68,7 @@ public class Agent {
 			//init Agent
 			InitAgent.Init(Teamname, num, beam, con);
 			//think
-			if(!GameState.getGameState().equalsIgnoreCase("BeforeKickOff")){	
+			if(!GameState.getGameState().equalsIgnoreCase("BeforeKickOff") && InitAgent.isPlayerInited()==true){	
 				Bh.BehaviorController();
 			}
 			//get the head movement

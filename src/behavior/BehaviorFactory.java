@@ -1,6 +1,7 @@
 package behavior;
 
 import action.GetKickablePosition;
+import action.Kick;
 import action.TurnToBall;
 import action.TurnToSeeBall;
 import action.WalkToBall;
@@ -12,7 +13,8 @@ public class BehaviorFactory {
 	TurnToSeeBall tTsB=new TurnToSeeBall();
 	TurnToBall tTb=new TurnToBall();
 	WalkToBall wTb=new WalkToBall();
-	GetKickablePosition gKp=new GetKickablePosition();
+	Kick Kb=new Kick();
+	GetKickablePosition gKp = new GetKickablePosition();
 
 	public void BehaviorController(){
 
@@ -49,7 +51,7 @@ public class BehaviorFactory {
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("NotSeeBall")){
 
 
-				tTsB.Act();					
+				tTsB.Act();
 
 				BehaviorStateMachine.setState("start");
 
@@ -60,19 +62,29 @@ public class BehaviorFactory {
 					BehaviorStateMachine.setState("walkToBall");
 				}else{
 
-					BehaviorStateMachine.setState("iReachTheBall");
+					BehaviorStateMachine.setState("closeToBall");
 
 
 				}
-
-			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("iReachTheBall")){
+				
+			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("closeToBall")){
+				
+				if(Ball.isKickable()==true){
+					BehaviorStateMachine.setState("Kick");
+				}else{
+					gKp.Act();
+					BehaviorStateMachine.setState("closeToBall");
+				}
+				
+				
+			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("Kick")){
 
 				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
 					BehaviorDone.setBehaviorDone(false);
-					BehaviorDone.setName("kick");
-					gKp.Act();				
-					BehaviorStateMachine.setState("iReachTheBall");
-				}else if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("kick")){
+					BehaviorDone.setName("Kick");
+					Kb.Act();				
+					BehaviorStateMachine.setState("Kick");
+				}else if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("Kick")){
 					BehaviorDone.setName("");
 					BehaviorDone.setBehaviorDone(true);
 					BehaviorStateMachine.setState("start");

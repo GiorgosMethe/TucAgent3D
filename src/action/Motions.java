@@ -86,7 +86,7 @@ public class Motions {
 			
 			
 			
-			float a=Float.valueOf(value[x+motionOffsetValues].trim());
+			float a=(float) (Float.valueOf(value[x+motionOffsetValues].trim()));
 			float a1=gNjV.Get(jointReal, a);
 
 			float a2 = (float) (a1/SpeedControl);
@@ -159,9 +159,9 @@ public class Motions {
 
 			MotionFilepath="motions/TurnRight60.motion";
 
-		}else if (motionName.equalsIgnoreCase("init")){
+		}else if (motionName.equalsIgnoreCase("Init")){
 
-			MotionFilepath="motions/init.motion";
+			MotionFilepath="motions/Init.motion";
 			
 		}else if (motionName.equalsIgnoreCase("KickForwardRight")){
 

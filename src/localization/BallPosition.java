@@ -45,17 +45,6 @@ public class BallPosition {
 		}
 	}
 
-	public static boolean IsBallKickable(){
-		//needs something
-		//needs something
-		//needs something
-		//needs something
-		//needs something
-		//needs something
-		//needs something
-		//needs something		
-		return false;
-	}
 
 	public static float getDistance() {
 		return distance;

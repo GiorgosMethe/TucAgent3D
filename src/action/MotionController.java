@@ -36,7 +36,7 @@ public class MotionController {
 
 		}else if (Motion.equalsIgnoreCase("Forwards")){
 
-			endMotionPose=66;
+			endMotionPose=40;
 			speed=3;
 			speedControl=10;
 			poseOffset=2;
@@ -61,9 +61,30 @@ public class MotionController {
 			speed=3;
 			speedControl=10;
 			poseOffset=2;
+			
+		}else if (Motion.equalsIgnoreCase("SideStepLeft")){
+
+			endMotionPose=124;
+			speed=3;
+			speedControl=10;
+			poseOffset=2;
+			
+		}else if (Motion.equalsIgnoreCase("SideStepRight")){
+
+			endMotionPose=145;
+			speed=3;
+			speedControl=10;
+			poseOffset=2;
 		}else if (Motion.equalsIgnoreCase("KickForwardRight")){
 
 			endMotionPose=61;
+			speed=3;
+			speedControl=10;
+			poseOffset=1;
+			
+		}else if (Motion.equalsIgnoreCase("Init")){
+
+			endMotionPose=6;
 			speed=3;
 			speedControl=10;
 			poseOffset=1;
@@ -80,13 +101,6 @@ public class MotionController {
 			endMotionPose=10;
 			speed=3;
 			speedControl=10;
-			poseOffset=1;
-			
-		}else if (Motion.equalsIgnoreCase("AldebaranFront")){
-
-			endMotionPose=14;
-			speed=10;
-			speedControl=15;
 			poseOffset=1;
 
 		}else{
