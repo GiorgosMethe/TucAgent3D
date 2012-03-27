@@ -2,6 +2,8 @@ package perceptor;
 
 import java.util.Vector;
 import javax.vecmath.Vector3d;
+
+import agent.Agent;
 import localization.*;
 import connection.Connection;
 import worldState.ServerTime;
@@ -316,7 +318,7 @@ public class Perceptors {
 							message.elementAt(j).equalsIgnoreCase("g1l")||message.elementAt(j).equalsIgnoreCase("g2l")||
 							message.elementAt(j).equalsIgnoreCase("g1r")||message.elementAt(j).equalsIgnoreCase("g2r")||
 							message.elementAt(j).equalsIgnoreCase("b")||message.elementAt(j).equalsIgnoreCase("p")
-							);
+					);
 					Coordinate loc_buffer=new Coordinate(0, 0);
 
 					int k=0;
@@ -339,6 +341,12 @@ public class Perceptors {
 						}
 					}
 					//System.out.println("I am  = ( "+curloc.getX()+" , "+ curloc.getY() +" )");
+					
+					///////////////////////////////////////////////////
+					AgentPosition.setX((float) curloc.getX());
+					AgentPosition.setY((float) curloc.getY());
+					//////////////////////////////////////////////////
+	
 					int l=0;
 					double angle_buffer=0;
 					double angle=0;
@@ -356,6 +364,11 @@ public class Perceptors {
 							head_angle=angle;
 						}
 					}
+					
+					////////////////////////////////////////////////////
+					AgentPosition.setTheta((float) (head_angle+HingeJointPerceptor.getHj1()));
+					////////////////////////////////////////////////////
+					
 					//System.out.println("I look at "+head_angle+" degrees");
 					//System.out.println("My body looks at " + (head_angle+HingeJointPerceptor.getHj1()));
 					Coordinate Ball_det=localizer.get_det_with_distance_angle(curloc.getX(), curloc.getY(), (head_angle+Ball.getAngleX()), Ball.getDistance());

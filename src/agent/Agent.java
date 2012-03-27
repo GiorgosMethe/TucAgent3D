@@ -47,9 +47,9 @@ public class Agent {
 		int i=0;
 
 		//player number
-		int num=1;
+		int num=3;
 		// team name
-		String Teamname="AustinVilla";
+		String Teamname="tuc";
 		//player position
 		String beamX="-4.0";
 		String beamY="0.0";

@@ -102,6 +102,13 @@ public class MotionController {
 			speed=3;
 			speedControl=10;
 			poseOffset=1;
+			
+		}else if (Motion.equalsIgnoreCase("KickSideRight")){
+
+			endMotionPose=38;
+			speed=3;
+			speedControl=10;
+			poseOffset=1;
 
 		}else{
 

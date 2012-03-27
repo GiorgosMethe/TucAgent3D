@@ -2,8 +2,7 @@ package action;
 
 public class WalkTo {
 	
-	public WalkTo(float x,float y,float theta){
-		
+	public void Act(float X,float Y,float Theta){
 		
 		
 		

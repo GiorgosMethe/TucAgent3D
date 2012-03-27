@@ -183,6 +183,10 @@ public class Motions {
 
 			MotionFilepath="motions/Forwards100.motion";
 			
+		}else if (motionName.equalsIgnoreCase("KickSideRight")){
+
+			MotionFilepath="motions/KickSideRight.motion";
+			
 		}else{
 
 			MotionFilepath="";
