@@ -29,7 +29,7 @@ public class MotionController {
 
 		if (Motion.equalsIgnoreCase("Forwards50")){
 
-			endMotionPose=171;
+			endMotionPose=135;
 			speed=3;
 			speedControl=10;
 			poseOffset=2;
@@ -48,13 +48,6 @@ public class MotionController {
 			speedControl=10;
 			poseOffset=2;
 			
-		}else if (Motion.equalsIgnoreCase("Forwards100")){
-
-			endMotionPose=150;
-			speed=3;
-			speedControl=10;
-			poseOffset=1;
-			
 		}else if (Motion.equalsIgnoreCase("TurnLeft40")){
 
 			endMotionPose=72;
@@ -62,6 +55,14 @@ public class MotionController {
 			speedControl=10;
 			poseOffset=2;
 			
+		}else if (Motion.equalsIgnoreCase("Forwards100")){
+
+			endMotionPose=150;
+			speed=3;
+			speedControl=10;
+			poseOffset=1;
+			
+		
 		}else if (Motion.equalsIgnoreCase("SideStepLeft")){
 
 			endMotionPose=124;
@@ -80,7 +81,7 @@ public class MotionController {
 			endMotionPose=61;
 			speed=3;
 			speedControl=10;
-			poseOffset=1;
+			poseOffset=2;
 			
 		}else if (Motion.equalsIgnoreCase("Init")){
 

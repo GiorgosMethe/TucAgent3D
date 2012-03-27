@@ -15,6 +15,7 @@ import worldState.GameState;
 public class Agent {
 
 
+	public static int num=0;
 	@SuppressWarnings("unused")
 	private static CurrentMotion mt;
 
@@ -23,7 +24,7 @@ public class Agent {
 		Perceptors Gp = new Perceptors();
 		SeekBall Sb = new SeekBall();
 		BehaviorFactory Bh = new BehaviorFactory();
-		new BehaviorStateMachine("goKickTheBall","start");
+		new BehaviorStateMachine("KickTheBallToGoal","start");
 		MotionController dnc=new MotionController();
 
 		//connection config
@@ -47,13 +48,13 @@ public class Agent {
 		int i=0;
 
 		//player number
-		int num=3;
+		num=1;
 		// team name
 		String Teamname="tuc";
 		//player position
-		String beamX="-4.0";
-		String beamY="0.0";
-		String beamTheta="0.0";
+		String beamX="-2.0";
+		String beamY="2.0";
+		String beamTheta="90.0";
 		String beam=beamX+" "+beamY+" "+beamTheta;
 
 		while(con.isConnected()){

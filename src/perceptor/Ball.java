@@ -53,9 +53,7 @@ public class Ball {
 			return true;
 		}else{
 			return false;
-		}
-		
-		
+		}	
 	}
 	
 }

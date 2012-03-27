@@ -298,8 +298,11 @@ public class Perceptors {
 								player_vertical_angle=player_horizontal_angle;	
 							}
 							Landmark player=new Landmark(player_id, player_distance, player_vertical_angle, player_horizontal_angle);
-							if(team_name.equalsIgnoreCase("TucAgent3D")){
-								coplayers.add(player);
+							if(team_name.equalsIgnoreCase("tuc")){
+								if(!player.getName().equalsIgnoreCase(Agent.num+"")){
+									System.out.println("yeahhhhh");
+									coplayers.add(player);
+								}
 							}else{
 								rivals.add(player);
 							}
@@ -345,6 +348,7 @@ public class Perceptors {
 					///////////////////////////////////////////////////
 					AgentPosition.setX((float) curloc.getX());
 					AgentPosition.setY((float) curloc.getY());
+					LocalizationResults.setCurrent_location(curloc);
 					//////////////////////////////////////////////////
 	
 					int l=0;
@@ -368,10 +372,16 @@ public class Perceptors {
 					////////////////////////////////////////////////////
 					AgentPosition.setTheta((float) (head_angle+HingeJointPerceptor.getHj1()));
 					////////////////////////////////////////////////////
+					LocalizationResults.setHead_angle(head_angle);
+					LocalizationResults.setBody_angle((head_angle-HingeJointPerceptor.getHj1()));
 					
 					//System.out.println("I look at "+head_angle+" degrees");
 					//System.out.println("My body looks at " + (head_angle+HingeJointPerceptor.getHj1()));
 					Coordinate Ball_det=localizer.get_det_with_distance_angle(curloc.getX(), curloc.getY(), (head_angle+Ball.getAngleX()), Ball.getDistance());
+					LocalizationResults.setBall_location(Ball_det);
+					LocalizationResults.setLandmarks(landmarks);
+					LocalizationResults.setCoplayers(coplayers);
+					LocalizationResults.setRivals(rivals);
 					for(int jj=0;jj<coplayers.size();jj++){
 						Coordinate found_player=localizer.get_det_with_distance_angle(curloc.getX(),curloc.getY() , (head_angle+coplayers.elementAt(jj).getHorizontal_Angle()), coplayers.elementAt(jj).getDistance());
 						//System.out.println("i see teammate with id ( "+ coplayers.elementAt(jj).getName()+" ) at distance ( "+coplayers.elementAt(jj).getDistance()+" ) at angle "+coplayers.elementAt(jj).getHorizontal_Angle());
@@ -390,9 +400,9 @@ public class Perceptors {
 					}
 					//System.out.println("I see ball at ( "+Ball_det.getX()+" , "+Ball_det.getY()+" ) at angle "+ Ball.getDistance());
 					//System.out.println("-------------------------------------------------------------------------------------------");
-					coplayers.removeAllElements();
-					rivals.removeAllElements();
-					landmarks.removeAllElements();
+					//coplayers.removeAllElements();
+					//rivals.removeAllElements();
+					//landmarks.removeAllElements();
 					i=j;
 					j=0;
 					see=true;
