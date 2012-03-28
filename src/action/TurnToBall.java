@@ -2,6 +2,7 @@ package action;
 
 import perceptor.HingeJointPerceptor;
 import localization.BallPosition;
+import motions.MotionTrigger;
 
 public class TurnToBall {
 	

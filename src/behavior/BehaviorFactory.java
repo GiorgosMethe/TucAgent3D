@@ -1,9 +1,11 @@
 package behavior;
 
+
+import motions.MotionTrigger;
 import action.GetKickablePosition;
 import action.GetPosToGoal;
+import action.GoToPos;
 import action.Kick;
-import action.MotionTrigger;
 import action.TurnToBall;
 import action.TurnToSeeBall;
 import action.WalkToBall;
@@ -18,12 +20,13 @@ public class BehaviorFactory {
 	Kick Kb=new Kick();
 	GetKickablePosition gKp = new GetKickablePosition();
 	GetPosToGoal gPtG = new GetPosToGoal();
+	GoToPos gTp= new GoToPos();
 
 	public void BehaviorController(){
 
 		System.out.println("Behavior:   "+BehaviorStateMachine.getState());
 		System.out.println("Motion   :"+MotionTrigger.getMotion());
-	
+
 		if(BehaviorStateMachine.getName().equalsIgnoreCase("goKickTheBall")){
 
 			if(BehaviorStateMachine.getState().equalsIgnoreCase("start")){
@@ -66,21 +69,11 @@ public class BehaviorFactory {
 					BehaviorStateMachine.setState("walkToBall");
 				}else{
 
-					BehaviorStateMachine.setState("closeToBall");
-
-
-				}
-				
-			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("closeToBall")){
-				
-				if(Ball.isKickable()==true){
 					BehaviorStateMachine.setState("Kick");
-				}else{
-					gKp.Act();
-					BehaviorStateMachine.setState("closeToBall");
-				}
-				
-				
+
+
+				}			
+
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("Kick")){
 
 				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
@@ -93,7 +86,7 @@ public class BehaviorFactory {
 					BehaviorDone.setBehaviorDone(true);
 					BehaviorStateMachine.setState("start");
 				}else{
-					
+
 				}
 			}
 
@@ -142,14 +135,16 @@ public class BehaviorFactory {
 
 
 				}
-				
+
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("GetPosToGoal")){
 
-				
-					gPtG.Act();
-					BehaviorStateMachine.setState("GetPosToGoal");
-				
-				
+
+				BehaviorStateMachine.setState("GetPosToGoal");
+				gPtG.Act();
+
+
+
+
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("Kick")){
 
 				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
@@ -162,8 +157,51 @@ public class BehaviorFactory {
 					BehaviorDone.setBehaviorDone(true);
 					BehaviorStateMachine.setState("start");
 				}else{
-					
+
 				}
+			}
+
+
+
+		}else if(BehaviorStateMachine.getName().equalsIgnoreCase("goToPos")){
+
+			if(BehaviorStateMachine.getState().equalsIgnoreCase("start")){
+
+				if(Vision.isiSee()==true){
+
+					if(Ball.isSeeTheBall()==true){
+
+						BehaviorStateMachine.setState("iSeeBall");
+
+					}else{
+
+						BehaviorStateMachine.setState("NotSeeBall");
+
+					}
+
+				}else{
+
+					BehaviorStateMachine.setState("start");
+
+				}
+
+			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("iSeeBall")){
+
+				gTp.Act();
+				if(Ball.isSeeTheBall()==true){
+					
+				}else{
+					BehaviorStateMachine.setState("start");
+				}
+
+
+			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("NotSeeBall")){
+
+
+				tTsB.Act();
+
+				BehaviorStateMachine.setState("start");
+
 			}
 
 		}

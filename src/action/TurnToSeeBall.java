@@ -1,5 +1,7 @@
 package action;
 
+import motions.MotionTrigger;
+
 
 public class TurnToSeeBall {
 

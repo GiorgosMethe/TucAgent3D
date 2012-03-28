@@ -1,10 +1,12 @@
 package agent;
 import localization.BallPosition;
+import localization.Landmark;
+import localization.LocalizationResults;
+import motions.CurrentMotion;
+import motions.MotionController;
+import motions.MotionTrigger;
 import behavior.BehaviorFactory;
 import behavior.BehaviorStateMachine;
-import action.MotionController;
-import action.CurrentMotion;
-import action.MotionTrigger;
 import action.SeekBall;
 import connection.Connection;
 import connection.ServerCyrcles;
@@ -24,7 +26,7 @@ public class Agent {
 		Perceptors Gp = new Perceptors();
 		SeekBall Sb = new SeekBall();
 		BehaviorFactory Bh = new BehaviorFactory();
-		new BehaviorStateMachine("KickTheBallToGoal","start");
+		
 		MotionController dnc=new MotionController();
 
 		//connection config
@@ -48,17 +50,17 @@ public class Agent {
 		int i=0;
 
 		//player number
-		num=1;
+		num=3;
 		// team name
-		String Teamname="tuc";
+		String Teamname="PANATHINAIKOS";
 		//player position
 		String beamX="-2.0";
-		String beamY="2.0";
-		String beamTheta="90.0";
+		String beamY="-3.0";
+		String beamTheta="0.0";
 		String beam=beamX+" "+beamY+" "+beamTheta;
 
 		while(con.isConnected()){
-
+			
 			i++;
 			//update perceptors
 			Gp.GetPerceptors(con);
@@ -73,7 +75,7 @@ public class Agent {
 				Bh.BehaviorController();
 			}
 			//get the head movement
-			String headAct=(Sb.MoveHead());
+			String headAct=Sb.MoveHead();
 			//get the agent action
 			String AgentAct= dnc.MotionFactory(MotionTrigger.getMotion());
 			//create the hole agents actions
@@ -81,6 +83,13 @@ public class Agent {
 			//Act
 			con.sendMessage(Act);
 
+			
+			System.out.println("----------X--------------------");
+			System.out.println(LocalizationResults.getCurrent_location().getX());
+			System.out.println("-----------Y-------------------");
+			System.out.println(LocalizationResults.getCurrent_location().getY());
+			System.out.println("-----------THETA-------------------");
+			System.out.println(LocalizationResults.body_angle);
 
 
 

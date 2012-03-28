@@ -1,8 +1,9 @@
 package agent;
 
-import action.CurrentMotion;
-import action.MotionTrigger;
+import motions.CurrentMotion;
+import motions.MotionTrigger;
 import behavior.BehaviorDone;
+import behavior.BehaviorStateMachine;
 import connection.Connection;
 import connection.ServerCyrcles;
 
@@ -17,6 +18,12 @@ public class InitAgent {
 		if(cyrcles>0 && cyrcles<10){
 			if(cyrcles==1){
 
+				if(number==1){
+					new BehaviorStateMachine("goKickTheBall","start");
+				}else{
+					new BehaviorStateMachine("goToPos","start");
+				}
+				CurrentMotion.setSoftChangeCounter(0);
 				InitAgent.setPlayerInited(false);
 				BehaviorDone.setName("");
 				BehaviorDone.setBehaviorDone(true);
