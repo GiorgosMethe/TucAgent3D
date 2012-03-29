@@ -19,7 +19,7 @@ public class InitAgent {
 			if(cyrcles==1){
 
 				if(number==1){
-					new BehaviorStateMachine("goKickTheBall","start");
+					new BehaviorStateMachine("KickTheBallToGoal","start");
 				}else{
 					new BehaviorStateMachine("goToPos","start");
 				}

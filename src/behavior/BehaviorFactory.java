@@ -24,8 +24,8 @@ public class BehaviorFactory {
 
 	public void BehaviorController(){
 
-		System.out.println("Behavior:   "+BehaviorStateMachine.getState());
-		System.out.println("Motion   :"+MotionTrigger.getMotion());
+		//System.out.println("Behavior:   "+BehaviorStateMachine.getState());
+		//System.out.println("Motion   :"+MotionTrigger.getMotion());
 
 		if(BehaviorStateMachine.getName().equalsIgnoreCase("goKickTheBall")){
 
@@ -127,7 +127,7 @@ public class BehaviorFactory {
 
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("walkToBall")){
 
-				if(Ball.getDistance()>0.5){
+				if(Ball.getDistance()>0.6){
 					wTb.Act();
 					BehaviorStateMachine.setState("walkToBall");
 				}else{
@@ -138,13 +138,21 @@ public class BehaviorFactory {
 
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("GetPosToGoal")){
 
-
-				BehaviorStateMachine.setState("GetPosToGoal");
 				gPtG.Act();
+				
+				
+			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("goBall")){
+
+				if(Ball.getDistance()>0.5){
+					wTb.Act();
+					BehaviorStateMachine.setState("goBall");
+				}else{
+					BehaviorStateMachine.setState("Kick");
 
 
-
-
+				}
+				
+				
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("Kick")){
 
 				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){

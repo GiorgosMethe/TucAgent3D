@@ -26,7 +26,7 @@ public class Agent {
 		Perceptors Gp = new Perceptors();
 		SeekBall Sb = new SeekBall();
 		BehaviorFactory Bh = new BehaviorFactory();
-		
+
 		MotionController dnc=new MotionController();
 
 		//connection config
@@ -50,17 +50,17 @@ public class Agent {
 		int i=0;
 
 		//player number
-		num=3;
+		num=1;
 		// team name
-		String Teamname="PANATHINAIKOS";
+		String Teamname="OSFP";
 		//player position
-		String beamX="-2.0";
-		String beamY="-3.0";
+		String beamX="-11.0";
+		String beamY="0.0";
 		String beamTheta="0.0";
 		String beam=beamX+" "+beamY+" "+beamTheta;
 
 		while(con.isConnected()){
-			
+
 			i++;
 			//update perceptors
 			Gp.GetPerceptors(con);
@@ -72,7 +72,7 @@ public class Agent {
 			InitAgent.Init(Teamname, num, beam, con);
 			//think
 			if(!GameState.getGameState().equalsIgnoreCase("BeforeKickOff") && InitAgent.isPlayerInited()==true){	
-				Bh.BehaviorController();
+				//Bh.BehaviorController();
 			}
 			//get the head movement
 			String headAct=Sb.MoveHead();
@@ -83,13 +83,23 @@ public class Agent {
 			//Act
 			con.sendMessage(Act);
 
+
+
+
+
+
+			////////////////////////////////////////////////////////////
+
+
+
+
 			
-			System.out.println("----------X--------------------");
-			System.out.println(LocalizationResults.getCurrent_location().getX());
-			System.out.println("-----------Y-------------------");
-			System.out.println(LocalizationResults.getCurrent_location().getY());
-			System.out.println("-----------THETA-------------------");
-			System.out.println(LocalizationResults.body_angle);
+
+
+
+			////////////////////////////////////////////////////////////////
+
+
 
 
 

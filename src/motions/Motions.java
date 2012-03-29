@@ -13,7 +13,7 @@ public class Motions {
 
 	private int motionOffsetValues;
 
-	public String Motion(String motionName, int i, int SpeedControl) {
+	public String Motion(String motionName, int i, int SpeedControl, double hardness) {
 
 
 		String msg = "";
@@ -86,7 +86,7 @@ public class Motions {
 			
 			
 			
-			float a=(float) (Float.valueOf(value[x+motionOffsetValues].trim()));
+			float a=(float) (Float.valueOf(value[x+motionOffsetValues].trim())*hardness);
 			float a1=gNjV.Get(jointReal, a);
 
 			float a2 = (float) (a1/SpeedControl);

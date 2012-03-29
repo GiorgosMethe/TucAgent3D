@@ -25,6 +25,7 @@ public class MotionController {
 		int pose=0;
 		Str="";
 		Motions dnc=new Motions();
+		double hardness=1;
 
 
 		if (Motion.equalsIgnoreCase("Forwards50")){
@@ -69,13 +70,16 @@ public class MotionController {
 			speed=3;
 			speedControl=10;
 			poseOffset=2;
+			hardness=0.8;
 			
 		}else if (Motion.equalsIgnoreCase("SideStepRight")){
 
 			endMotionPose=145;
 			speed=3;
-			speedControl=10;
+			speedControl=9;
 			poseOffset=2;
+			hardness=0.8;
+			
 		}else if (Motion.equalsIgnoreCase("KickForwardRight")){
 
 			endMotionPose=61;
@@ -155,7 +159,7 @@ public class MotionController {
 
 				}else{
 					CurrentMotion.setMotionPose(pose);
-					return dnc.Motion(Motion,pose,speedControl);
+					return dnc.Motion(Motion,pose,speedControl,hardness);
 				}
 
 			}

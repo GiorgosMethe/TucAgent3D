@@ -1,46 +1,53 @@
 package action;
 
+import connection.ServerCyrcles;
+import localization.Coordinate;
 import localization.Landmark;
 import localization.LocalizationResults;
+import motions.MotionTrigger;
 import perceptor.HingeJointPerceptor;
 
 public class WalkTo {
 	
 	public void Act(float X,float Y,float Theta){
 		
-		boolean iseegoal=false;
-		float Distance1;
-		float Distance2;
-		float Angle1=0;
-		float Angle2 = 0;
-		float prefferedAngleKick=0;
-		float prefferedAngleKickFromBody=0;
-		
-		for(int k=0;k<LocalizationResults.getLandmarks().size();k++){
-			Landmark a=LocalizationResults.getLandmarks().elementAt(k);
-			if(a.getName().equalsIgnoreCase("g1r")){
-				iseegoal=true;
-				Distance1=(float) a.getDistance();
-				Angle1=(float) a.getHorizontal_Angle();
+		Coordinate target=new Coordinate(4, -4);
+
+		double dx=target.getX()-LocalizationResults.current_location.getX();
+		double dy=target.getY()-LocalizationResults.current_location.getY();
+		double dTheta=-Math.atan(dy/dx)+LocalizationResults.getBody_angle();
+
+		System.out.println("----------dx--------------------");
+		System.out.println(dx);
+		System.out.println("-----------dy-------------------");
+		System.out.println(dy);
+		System.out.println("-----------dTheta-------------------");
+		System.out.println(dTheta);
+
+
+
+		if(ServerCyrcles.getCyrclesNow()%20==0){
+			if(Math.abs(dx)<1 && Math.abs(dy)<1){
+				MotionTrigger.setMotion("");
+			}else{
+
+
+				if(dTheta>15){
+
+					if(dTheta>0){
+						MotionTrigger.setMotion("TurnRight40");
+
+					}else{
+						MotionTrigger.setMotion("TurnLeft40");
+					}
+
+				}else{
+
+					MotionTrigger.setMotion("Forwards50");
+
+				}
+
 			}
-			if(a.getName().equalsIgnoreCase("g2r")){
-				iseegoal=true;
-				Distance2=(float) a.getDistance();
-				Angle2=(float) a.getHorizontal_Angle();
-			}
-		
-		}
-		
-		if(iseegoal==true){
-			prefferedAngleKick=(Angle1+Angle2)/2;
-			System.out.println("----------prankick--------------------");
-			System.out.println(prefferedAngleKick);
-			System.out.println("-----------prformbody-------------------");
-			prefferedAngleKickFromBody=prefferedAngleKick+HingeJointPerceptor.getHj1();
-			System.out.println(prefferedAngleKickFromBody);
-			System.out.println("-----------body-------------------");
-			System.out.println(LocalizationResults.body_angle);
-				
 		}
 		
 	}

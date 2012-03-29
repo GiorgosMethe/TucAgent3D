@@ -14,47 +14,94 @@ public class GetPosToGoal {
 
 	public void Act(){
 
+		boolean iseegoal=false;
+		float Distance1 = 0;
+		float Distance2 = 0;
+		float Angle1=0;
+		float Angle2 = 0;
+		float prefferedAngleKick=0;
+		for(int k=0;k<LocalizationResults.getLandmarks().size();k++){
+			Landmark a=LocalizationResults.getLandmarks().elementAt(k);
+			if(a.getName().equalsIgnoreCase("g1r")){
+				iseegoal=true;
+				Distance1=(float) a.getDistance();
+				Angle1=(float) a.getHorizontal_Angle();
+			}
+			if(a.getName().equalsIgnoreCase("g2r")){
+				iseegoal=true;
+				Distance2=(float) a.getDistance();
+				Angle2=(float) a.getHorizontal_Angle();
+			}
+
+		}
+		if(iseegoal==true){	
+			prefferedAngleKick=(Angle1+Angle2)/2;
+			System.out.println("body angle:"+LocalizationResults.getBody_angle());
+			System.out.println("distanceL"+Distance1);
+			System.out.println("angleL"+Angle1);
+			System.out.println("distanceR"+Distance2);
+			System.out.println("angleR"+Angle2);
+			System.out.println("PrefferedKick"+prefferedAngleKick);
+			System.out.println("--------------------------------------");
 
 
-
-		Coordinate target=new Coordinate(4, -4);
-
-		double dx=target.getX()-LocalizationResults.current_location.getX();
-		double dy=target.getY()-LocalizationResults.current_location.getY();
-		double dTheta=-Math.atan(dy/dx)+LocalizationResults.getBody_angle();
-
-		System.out.println("----------dx--------------------");
-		System.out.println(dx);
-		System.out.println("-----------dy-------------------");
-		System.out.println(dy);
-		System.out.println("-----------dTheta-------------------");
-		System.out.println(dTheta);
+			if(Math.abs(LocalizationResults.getBody_angle()-prefferedAngleKick)>5){
 
 
+				if(prefferedAngleKick>0){
+					if(Math.abs((HingeJointPerceptor.getHj1()+BallPosition.getAngle()))>20){
 
-		if(ServerCyrcles.getCyrclesNow()%20==0){
-			if(Math.abs(dx)<1 && Math.abs(dy)<1){
-				MotionTrigger.setMotion("");
-			}else{
+						if(HingeJointPerceptor.getHj1()>0){
+							MotionTrigger.setMotion("TurnLeft40");
 
+						}else{
+							MotionTrigger.setMotion("TurnRight40");
 
-				if(dTheta>15){
+						}
 
-					if(dTheta>0){
-						MotionTrigger.setMotion("TurnRight40");
 
 					}else{
-						MotionTrigger.setMotion("TurnLeft40");
+						MotionTrigger.setMotion("SideStepRight");
 					}
-
 				}else{
+					if(Math.abs((HingeJointPerceptor.getHj1()+BallPosition.getAngle()))>20){
 
-					MotionTrigger.setMotion("Forwards50");
+						if(HingeJointPerceptor.getHj1()>0){
+							MotionTrigger.setMotion("TurnLeft40");
 
+						}else{
+							MotionTrigger.setMotion("TurnRight40");
+
+						}
+
+
+					}else{
+						MotionTrigger.setMotion("SideStepLeft");
+					}
 				}
 
+
+
+
+			}else{
+				
+				BehaviorStateMachine.setState("goBall");
+				
 			}
+
+
+
 		}
 
+
+
+
+
+
 	}
+
+
+
+
+
 }
