@@ -22,20 +22,32 @@ public class GetPosToGoal {
 		float prefferedAngleKick=0;
 		for(int k=0;k<LocalizationResults.getLandmarks().size();k++){
 			Landmark a=LocalizationResults.getLandmarks().elementAt(k);
-			if(a.getName().equalsIgnoreCase("g1r")){
+			if(a.getName().equalsIgnoreCase("g1l")){
 				iseegoal=true;
 				Distance1=(float) a.getDistance();
 				Angle1=(float) a.getHorizontal_Angle();
+				System.out.println("blepw to aristero");
 			}
-			if(a.getName().equalsIgnoreCase("g2r")){
+			if(a.getName().equalsIgnoreCase("g2l")){
 				iseegoal=true;
 				Distance2=(float) a.getDistance();
 				Angle2=(float) a.getHorizontal_Angle();
+				System.out.println("blepw to aristero");
 			}
 
 		}
 		if(iseegoal==true){	
+			
 			prefferedAngleKick=(Angle1+Angle2)/2;
+			
+		}else{
+			
+			prefferedAngleKick=180;
+			
+		}
+			
+			System.out.println("paw na brw gwnia");
+			
 			System.out.println("body angle:"+LocalizationResults.getBody_angle());
 			System.out.println("distanceL"+Distance1);
 			System.out.println("angleL"+Angle1);
@@ -45,7 +57,7 @@ public class GetPosToGoal {
 			System.out.println("--------------------------------------");
 
 
-			if(Math.abs(LocalizationResults.getBody_angle()-prefferedAngleKick)>5){
+			if(Math.abs(LocalizationResults.getBody_angle()-prefferedAngleKick)>10){
 
 
 				if(prefferedAngleKick>0){
@@ -91,7 +103,7 @@ public class GetPosToGoal {
 
 
 
-		}
+		
 
 
 

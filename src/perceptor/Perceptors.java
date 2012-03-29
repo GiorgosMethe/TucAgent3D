@@ -3,9 +3,12 @@ package perceptor;
 import java.util.Vector;
 import javax.vecmath.Vector3d;
 
+import communication.HearMessage;
+
 import agent.Agent;
 import localization.*;
 import connection.Connection;
+import connection.ServerCyrcles;
 import worldState.ServerTime;
 import worldState.GameState;
 
@@ -45,8 +48,7 @@ public class Perceptors {
 
 				} else if (message.elementAt(i).equalsIgnoreCase("GS")) {
 
-					float time = Float.parseFloat(message.elementAt(i + 2)
-							.toString());
+					float time = Float.parseFloat(message.elementAt(i + 2).toString());
 					GameState.setGameTime(time);
 					GameState.setGameState(message.elementAt(i + 4).toString());
 					// System.out.println("game state @ "+i);
@@ -206,9 +208,23 @@ public class Perceptors {
 					i = i + 5;
 
 				} else if (message.elementAt(i).equalsIgnoreCase("hear")) {
+					
+					float time = Float.parseFloat(message.elementAt(i+1));
+					HearMessage.setTime(time);
+					
+					if(message.elementAt(i+2).equalsIgnoreCase("self")){
+						HearMessage.setSelf(true);
+					}else{
+						HearMessage.setSelf(false);
+						float direction = Float.parseFloat(message.elementAt(i+2));
+						HearMessage.setDirection(direction);
+					}
 
-					// System.out.println("hear perceptor @ "+i);
-					i = i + 1;
+					String msg = message.elementAt(i+3);
+					HearMessage.setMsg(msg);
+										
+					//hearVec.addElement(hm);
+					i = i + 4;
 
 				} else if (message.elementAt(i).equalsIgnoreCase("See")) {
 					j=i;

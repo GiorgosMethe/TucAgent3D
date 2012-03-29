@@ -70,7 +70,7 @@ public class MotionController {
 			speed=3;
 			speedControl=10;
 			poseOffset=2;
-			hardness=0.8;
+			hardness=0.6;
 			
 		}else if (Motion.equalsIgnoreCase("SideStepRight")){
 
@@ -78,7 +78,7 @@ public class MotionController {
 			speed=3;
 			speedControl=9;
 			poseOffset=2;
-			hardness=0.8;
+			hardness=0.6;
 			
 		}else if (Motion.equalsIgnoreCase("KickForwardRight")){
 

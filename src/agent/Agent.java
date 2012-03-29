@@ -1,4 +1,7 @@
 package agent;
+import communication.HearMessage;
+import communication.SendMessage;
+
 import localization.BallPosition;
 import localization.Landmark;
 import localization.LocalizationResults;
@@ -10,6 +13,7 @@ import behavior.BehaviorStateMachine;
 import action.SeekBall;
 import connection.Connection;
 import connection.ServerCyrcles;
+import perceptor.Ball;
 import perceptor.Perceptors;
 import worldState.GameState;
 
@@ -26,7 +30,7 @@ public class Agent {
 		Perceptors Gp = new Perceptors();
 		SeekBall Sb = new SeekBall();
 		BehaviorFactory Bh = new BehaviorFactory();
-
+		SendMessage sm = new SendMessage();
 		MotionController dnc=new MotionController();
 
 		//connection config
@@ -50,12 +54,12 @@ public class Agent {
 		int i=0;
 
 		//player number
-		num=1;
+		num=2;
 		// team name
-		String Teamname="OSFP";
+		String Teamname="tuc";
 		//player position
-		String beamX="-11.0";
-		String beamY="0.0";
+		String beamX="-4.0";
+		String beamY="4.0";
 		String beamTheta="0.0";
 		String beam=beamX+" "+beamY+" "+beamTheta;
 
@@ -72,7 +76,11 @@ public class Agent {
 			InitAgent.Init(Teamname, num, beam, con);
 			//think
 			if(!GameState.getGameState().equalsIgnoreCase("BeforeKickOff") && InitAgent.isPlayerInited()==true){	
-				//Bh.BehaviorController();
+				Bh.BehaviorController();
+				//Communication
+				//say message
+				sm.Say("distance", con);
+				HearMessage.MessageDecoder();
 			}
 			//get the head movement
 			String headAct=Sb.MoveHead();
@@ -82,27 +90,7 @@ public class Agent {
 			String Act=headAct+AgentAct;
 			//Act
 			con.sendMessage(Act);
-
-
-
-
-
-
-			////////////////////////////////////////////////////////////
-
-
-
-
 			
-
-
-
-			////////////////////////////////////////////////////////////////
-
-
-
-
-
 		}
 
 	}

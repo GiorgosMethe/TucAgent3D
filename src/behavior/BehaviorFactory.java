@@ -24,8 +24,8 @@ public class BehaviorFactory {
 
 	public void BehaviorController(){
 
-		//System.out.println("Behavior:   "+BehaviorStateMachine.getState());
-		//System.out.println("Motion   :"+MotionTrigger.getMotion());
+		System.out.println("Behavior:"+BehaviorStateMachine.getState());
+		System.out.println("Motion:"+MotionTrigger.getMotion());
 
 		if(BehaviorStateMachine.getName().equalsIgnoreCase("goKickTheBall")){
 

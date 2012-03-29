@@ -1,5 +1,8 @@
 package agent;
 
+import communication.HearMessage;
+import communication.WhoSent;
+
 import motions.CurrentMotion;
 import motions.MotionTrigger;
 import behavior.BehaviorDone;
@@ -16,13 +19,8 @@ public class InitAgent {
 		int cyrcles=ServerCyrcles.getCyrclesNow();
 		//boolean AgentInitialized=false;
 		if(cyrcles>0 && cyrcles<10){
-			if(cyrcles==1){
-
-				if(number==1){
-					new BehaviorStateMachine("KickTheBallToGoal","start");
-				}else{
-					new BehaviorStateMachine("goToPos","start");
-				}
+			if(cyrcles==1){			
+				new BehaviorStateMachine("goToPos","start");
 				CurrentMotion.setSoftChangeCounter(0);
 				InitAgent.setPlayerInited(false);
 				BehaviorDone.setName("");
@@ -30,7 +28,10 @@ public class InitAgent {
 				MotionTrigger.setMotion("");
 				CurrentMotion.setCurrentMotionPlaying("");
 				con.sendMessage("(init(unum "+number+")(teamname "+Teamname+"))");
-
+				AgentType.setPlayerNum(number);
+				WhoSent.setCounter(1);
+				HearMessage.InitMessage();
+				
 
 			}else if(cyrcles==3){
 
