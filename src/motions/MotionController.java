@@ -67,18 +67,18 @@ public class MotionController {
 		}else if (Motion.equalsIgnoreCase("SideStepLeft")){
 
 			endMotionPose=124;
-			speed=3;
+			speed=2;
 			speedControl=10;
 			poseOffset=2;
-			hardness=0.6;
+			hardness=0.7;
 			
 		}else if (Motion.equalsIgnoreCase("SideStepRight")){
 
 			endMotionPose=145;
-			speed=3;
+			speed=2;
 			speedControl=9;
 			poseOffset=2;
-			hardness=0.6;
+			hardness=0.7;
 			
 		}else if (Motion.equalsIgnoreCase("KickForwardRight")){
 

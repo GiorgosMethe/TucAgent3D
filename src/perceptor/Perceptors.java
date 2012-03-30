@@ -6,11 +6,13 @@ import javax.vecmath.Vector3d;
 import communication.HearMessage;
 
 import agent.Agent;
+import agent.AgentType;
 import localization.*;
 import connection.Connection;
 import connection.ServerCyrcles;
 import worldState.ServerTime;
 import worldState.GameState;
+import worldState.TeamState;
 
 public class Perceptors {
 	Coordinate curloc=new Coordinate(0, 0);
@@ -48,11 +50,22 @@ public class Perceptors {
 
 				} else if (message.elementAt(i).equalsIgnoreCase("GS")) {
 
-					float time = Float.parseFloat(message.elementAt(i + 2).toString());
-					GameState.setGameTime(time);
-					GameState.setGameState(message.elementAt(i + 4).toString());
-					// System.out.println("game state @ "+i);
-					i = i + 5;
+					if(message.elementAt(i+1).equalsIgnoreCase("t")){
+						float time = Float.parseFloat(message.elementAt(i + 2).toString());
+						GameState.setGameTime(time);
+						GameState.setGameState(message.elementAt(i + 4).toString());
+						// System.out.println("game state @ "+i);
+						i = i + 5;
+					}else if(message.elementAt(i+1).equalsIgnoreCase("unum")){
+						int num=Integer.parseInt(message.elementAt(i+2));
+						AgentType.setPlayerNum(num);
+						TeamState.setTeamSide(message.elementAt(i+4));
+						float time = Float.parseFloat(message.elementAt(i + 6).toString());
+						GameState.setGameTime(time);
+						GameState.setGameState(message.elementAt(i + 8).toString());
+						i=i+9;
+					}
+
 
 				} else if (message.elementAt(i).equalsIgnoreCase("GYR")) {
 
@@ -208,10 +221,10 @@ public class Perceptors {
 					i = i + 5;
 
 				} else if (message.elementAt(i).equalsIgnoreCase("hear")) {
-					
+
 					float time = Float.parseFloat(message.elementAt(i+1));
 					HearMessage.setTime(time);
-					
+
 					if(message.elementAt(i+2).equalsIgnoreCase("self")){
 						HearMessage.setSelf(true);
 					}else{
@@ -222,7 +235,7 @@ public class Perceptors {
 
 					String msg = message.elementAt(i+3);
 					HearMessage.setMsg(msg);
-										
+
 					//hearVec.addElement(hm);
 					i = i + 4;
 
@@ -316,7 +329,6 @@ public class Perceptors {
 							Landmark player=new Landmark(player_id, player_distance, player_vertical_angle, player_horizontal_angle);
 							if(team_name.equalsIgnoreCase("tuc")){
 								if(!player.getName().equalsIgnoreCase(Agent.num+"")){
-									System.out.println("yeahhhhh");
 									coplayers.add(player);
 								}
 							}else{
@@ -360,13 +372,13 @@ public class Perceptors {
 						}
 					}
 					//System.out.println("I am  = ( "+curloc.getX()+" , "+ curloc.getY() +" )");
-					
+
 					///////////////////////////////////////////////////
 					AgentPosition.setX((float) curloc.getX());
 					AgentPosition.setY((float) curloc.getY());
 					LocalizationResults.setCurrent_location(curloc);
 					//////////////////////////////////////////////////
-	
+
 					int l=0;
 					double angle_buffer=0;
 					double angle=0;
@@ -384,13 +396,13 @@ public class Perceptors {
 							head_angle=angle;
 						}
 					}
-					
+
 					////////////////////////////////////////////////////
 					AgentPosition.setTheta((float) (head_angle+HingeJointPerceptor.getHj1()));
 					////////////////////////////////////////////////////
 					LocalizationResults.setHead_angle(head_angle);
 					LocalizationResults.setBody_angle((head_angle-HingeJointPerceptor.getHj1()));
-					
+
 					//System.out.println("I look at "+head_angle+" degrees");
 					//System.out.println("My body looks at " + (head_angle+HingeJointPerceptor.getHj1()));
 					Coordinate Ball_det=localizer.get_det_with_distance_angle(curloc.getX(), curloc.getY(), (head_angle+Ball.getAngleX()), Ball.getDistance());

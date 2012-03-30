@@ -16,6 +16,9 @@ import connection.ServerCyrcles;
 import perceptor.Ball;
 import perceptor.Perceptors;
 import worldState.GameState;
+import worldState.TeamState;
+
+import java.lang.String;
 
 
 public class Agent {
@@ -54,12 +57,12 @@ public class Agent {
 		int i=0;
 
 		//player number
-		num=2;
+		num=3;
 		// team name
 		String Teamname="tuc";
 		//player position
 		String beamX="-4.0";
-		String beamY="4.0";
+		String beamY="0.0";
 		String beamTheta="0.0";
 		String beam=beamX+" "+beamY+" "+beamTheta;
 

@@ -9,6 +9,7 @@ import localization.LocalizationResults;
 import motions.MotionTrigger;
 import perceptor.Ball;
 import perceptor.HingeJointPerceptor;
+import worldState.TeamState;
 
 public class GetPosToGoal {
 
@@ -22,13 +23,14 @@ public class GetPosToGoal {
 		float prefferedAngleKick=0;
 		for(int k=0;k<LocalizationResults.getLandmarks().size();k++){
 			Landmark a=LocalizationResults.getLandmarks().elementAt(k);
-			if(a.getName().equalsIgnoreCase("g1l")){
+			
+			if(a.getName().equalsIgnoreCase(TeamState.getOppGoal1())){
 				iseegoal=true;
 				Distance1=(float) a.getDistance();
 				Angle1=(float) a.getHorizontal_Angle();
 				System.out.println("blepw to aristero");
 			}
-			if(a.getName().equalsIgnoreCase("g2l")){
+			if(a.getName().equalsIgnoreCase(TeamState.getOppGoal2())){
 				iseegoal=true;
 				Distance2=(float) a.getDistance();
 				Angle2=(float) a.getHorizontal_Angle();
@@ -57,7 +59,7 @@ public class GetPosToGoal {
 			System.out.println("--------------------------------------");
 
 
-			if(Math.abs(LocalizationResults.getBody_angle()-prefferedAngleKick)>10){
+			if(Math.abs(LocalizationResults.getBody_angle()-prefferedAngleKick)>20){
 
 
 				if(prefferedAngleKick>0){
