@@ -12,9 +12,9 @@ import behavior.BehaviorFactory;
 import behavior.BehaviorStateMachine;
 import action.SeekBall;
 import connection.Connection;
+import connection.MessageController;
 import connection.ServerCyrcles;
 import perceptor.Ball;
-import perceptor.Perceptors;
 import worldState.GameState;
 import worldState.TeamState;
 
@@ -30,7 +30,7 @@ public class Agent {
 
 	public static void main(String[] args) {
 
-		Perceptors Gp = new Perceptors();
+		MessageController Gp = new MessageController();
 		SeekBall Sb = new SeekBall();
 		BehaviorFactory Bh = new BehaviorFactory();
 		SendMessage sm = new SendMessage();
