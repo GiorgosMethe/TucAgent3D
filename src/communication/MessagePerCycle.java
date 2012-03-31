@@ -7,9 +7,9 @@ public class MessagePerCycle {
 
 	public static boolean PerNumCircles(int number){
 
-		int MaxNum=4;
+		int MaxNum=7;
 
-		if (ServerCyrcles.getCyrclesNow()%3==0){
+		if (ServerCyrcles.getCyrclesNow()%4==0){
 
 			if(WhoSent.getCounter()==MaxNum){
 				WhoSent.setCounter(1);

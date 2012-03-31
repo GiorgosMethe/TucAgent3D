@@ -11,6 +11,7 @@ import perceptor.HingeJointPerceptor;
 import perceptor.Vision;
 
 import communication.HearMessage;
+import communication.MessageBuffer;
 
 import agent.Agent;
 import agent.AgentType;
@@ -227,22 +228,22 @@ public class MessageController {
 
 				} else if (message.elementAt(i).equalsIgnoreCase("hear")) {
 
-					float time = Float.parseFloat(message.elementAt(i+1));
-					HearMessage.setTime(time);
-
 					if(message.elementAt(i+2).equalsIgnoreCase("self")){
-						HearMessage.setSelf(true);
+						i = i + 4;
 					}else{
+	
+						System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 						HearMessage.setSelf(false);
 						float direction = Float.parseFloat(message.elementAt(i+2));
 						HearMessage.setDirection(direction);
+						float time = Float.parseFloat(message.elementAt(i+1));
+						HearMessage.setTime(time);
+						String msg = message.elementAt(i+3);
+						HearMessage.setMsg(msg);
+						HearMessage Htemp = new HearMessage(time, direction, msg, false);
+						MessageBuffer.UpdateBuffer(Htemp);
+						i = i + 4;
 					}
-
-					String msg = message.elementAt(i+3);
-					HearMessage.setMsg(msg);
-
-					//hearVec.addElement(hm);
-					i = i + 4;
 
 				} else if (message.elementAt(i).equalsIgnoreCase("See")) {
 					j=i;

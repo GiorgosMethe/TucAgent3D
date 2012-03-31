@@ -1,6 +1,7 @@
 package communication;
 
 import perceptor.Ball;
+import worldState.TeamState;
 import agent.AgentType;
 import connection.Connection;
 public class SendMessage {
@@ -24,7 +25,7 @@ public class SendMessage {
 	public String DistanceMessageCoder(){
 		String message="";
 		
-		message="d%"+Integer.toString(AgentType.getPlayerNum())+"%"+Float.toString(Ball.getDistance());
+		message="d%"+TeamState.getTeamSide()+"%"+Integer.toString(AgentType.getPlayerNum())+"%"+Float.toString(Ball.getDistance());
 		
 		
 		return message;

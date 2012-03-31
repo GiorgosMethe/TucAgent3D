@@ -1,5 +1,6 @@
 package agent;
 import communication.HearMessage;
+import communication.MessageBuffer;
 import communication.SendMessage;
 
 import localization.AgentPosition;
@@ -37,18 +38,26 @@ public class Agent {
 	@SuppressWarnings("unused")
 	private static CurrentMotion mt;
 
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 
 		MessageController Gp = new MessageController();
 		SeekBall Sb = new SeekBall();
 		
 		BehaviorFactory Bh = new BehaviorFactory();
+		@SuppressWarnings("unused")
 		Goalie Gb = new Goalie();
+		@SuppressWarnings("unused")
 		ForwardCenter fc=new ForwardCenter();
+		@SuppressWarnings("unused")
 		ForwardLeft fl=new ForwardLeft();
+		@SuppressWarnings("unused")
 		ForwardRight fr=new ForwardRight();
+		@SuppressWarnings("unused")
 		DefenderCenter dc=new DefenderCenter();
+		@SuppressWarnings("unused")
 		DefenderLeft dl=new DefenderLeft();
+		@SuppressWarnings("unused")
 		DefenderRight dr=new DefenderRight();
 		
 		SendMessage sm = new SendMessage();
@@ -76,12 +85,12 @@ public class Agent {
 
 		float max=0;
 		//player number
-		num=2;
+		num=7;
 		// team name
 		String Teamname="tuc";
 		//player position
 		String beamX="-4.0";
-		String beamY="0.0";
+		String beamY="4.0";
 		String beamTheta="0.0";
 		String beam=beamX+" "+beamY+" "+beamTheta;
 
@@ -109,13 +118,15 @@ public class Agent {
 				//	BehaviorStateMachine.setState("start");
 	
 				//}
+				
+				
 	
 			Bh.BehaviorController();
 				//}
 				//Communication
 				//say message
-				//sm.Say("distance", con);
-				//HearMessage.MessageDecoder();
+				sm.Say("distance", con);
+				HearMessage.MessageDecoder();
 			}
 			//MotionTrigger.setMotion("turnOver2");
 			//get the head movement
@@ -126,6 +137,8 @@ public class Agent {
 			String Act=headAct+AgentAct;
 			//Act
 			con.sendMessage(Act);
+			
+			
 			
 		}
 

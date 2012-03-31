@@ -232,9 +232,13 @@ public class BehaviorFactory {
 
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("iSeeBall")){
 
-				gTp.Act();
+				
 				if(Ball.isSeeTheBall()==true){
-
+					if(Ball.getDistance()>5){
+						gTp.Act();
+					}else{
+						BehaviorStateMachine.setState("start");
+					}
 				}else{
 					BehaviorStateMachine.setState("start");
 				}

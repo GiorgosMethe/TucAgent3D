@@ -21,7 +21,7 @@ public class InitAgent {
 		if(cyrcles>0 && cyrcles<10){
 			if(cyrcles==1){
 				
-				new BehaviorStateMachine("KickTheBallToGoal","start");
+				new BehaviorStateMachine("goToPos","start");
 				CurrentMotion.setSoftChangeCounter(0);
 				InitAgent.setPlayerInited(false);
 				BehaviorDone.setName("");

@@ -1,9 +1,10 @@
 package communication;
 
 import connection.Connection;
+import agent.AgentType;
 import behavior.BehaviorStateMachine;
 import perceptor.Ball;
-
+import worldState.TeamState;
 public class HearMessage {
 
 	Connection con = new Connection();
@@ -64,6 +65,16 @@ public class HearMessage {
 		HearMessage.self = self;
 	}
 
+
+
+	public static void InitMessage(){
+
+		setMsg(null);
+		setDirection(0);
+		setTime(0);
+		setSelf(true);
+	}
+
 	public static void MessageDecoder(){
 
 		if(isSelf()==false){
@@ -80,32 +91,45 @@ public class HearMessage {
 
 	public static void DistMessageAct(String msg[]){
 
-		float distance = Float.parseFloat(msg[2]);
-		System.out.println(distance);
+		float distance = Float.parseFloat(msg[3]);
 
-		if(Ball.getDistance()<distance){
 
-			
-			if(!BehaviorStateMachine.getName().equalsIgnoreCase("KickTheBallToGoal")){
-				System.out.println("paw gia thn mpala");
-				BehaviorStateMachine.setName("KickTheBallToGoal");
-				BehaviorStateMachine.setState("start");
-			}
-		}else{
-			System.out.println("mou milaei allos kai einai pio konta");
-			if(!BehaviorStateMachine.getName().equalsIgnoreCase("goToPos")){
-				System.out.println("stamataw");
-				BehaviorStateMachine.setName("goToPos");
-				BehaviorStateMachine.setState("start");
+		if(TeamState.getTeamSide().equalsIgnoreCase(msg[1])){
+
+
+			for(int i=1;i<MessageBuffer.getDistancesBuffer().length;i++){
+
+				if(i==AgentType.getPlayerNum()){
+
+
+				}else{
+
+
+					if(Ball.getDistance()<MessageBuffer.getDistancesBuffer()[i]){
+
+						if(!BehaviorStateMachine.getName().equalsIgnoreCase("goKickTheBall")){
+							BehaviorStateMachine.setName("goKickTheBall");
+							BehaviorStateMachine.setState("start");
+						}
+					}else{
+
+						System.out.println("mou milaei allos kai einai pio konta");
+						if(!BehaviorStateMachine.getName().equalsIgnoreCase("Wait")){
+
+							if(BehaviorStateMachine.getName().equalsIgnoreCase("Fallen")){
+								BehaviorStateMachine.setName("Fallen");
+								return;
+							}
+							BehaviorStateMachine.setName("Wait");
+							BehaviorStateMachine.setState("start");
+						}
+					}
+
+				}
 			}
 		}
+
 	}
 
-	public static void InitMessage(){
 
-		setMsg(null);
-		setDirection(0);
-		setTime(0);
-		setSelf(true);
-	}
 }
