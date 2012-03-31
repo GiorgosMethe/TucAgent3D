@@ -1,7 +1,8 @@
 package behavior;
 
-
 import motions.MotionTrigger;
+import perceptor.Ball;
+import perceptor.Vision;
 import action.GetKickablePosition;
 import action.GetPosToGoal;
 import action.GetUp;
@@ -12,10 +13,8 @@ import action.TurnOver;
 import action.TurnToBall;
 import action.TurnToSeeBall;
 import action.WalkToBall;
-import perceptor.Ball;
-import perceptor.Vision;
 
-public class BehaviorFactory {
+public class ForwardRight {
 
 	TurnToSeeBall tTsB=new TurnToSeeBall();
 	TurnToBall tTb=new TurnToBall();
@@ -323,6 +322,5 @@ public class BehaviorFactory {
 
 
 	}
-
 
 }

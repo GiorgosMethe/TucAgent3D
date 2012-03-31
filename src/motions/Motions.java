@@ -166,22 +166,18 @@ public class Motions {
 		}else if (motionName.equalsIgnoreCase("KickForwardRight")){
 
 			MotionFilepath="motions/KickForwardRight.motion";
+			
+		}else if (motionName.equalsIgnoreCase("getup")){
+
+			MotionFilepath="motions/getup.motion";
 		
 		}else if (motionName.equalsIgnoreCase("leftFall")){
 
 			MotionFilepath="motions/leftFall.motion";
 			
-		}else if (motionName.equalsIgnoreCase("Aerobic")){
+		}else if (motionName.equalsIgnoreCase("turnOver2")){
 
-			MotionFilepath="motions/Aerobic.motion";
-			
-		}else if (motionName.equalsIgnoreCase("AldebaranFront")){
-
-			MotionFilepath="motions/AldebaranFront.motion";
-			
-		}else if (motionName.equalsIgnoreCase("Forwards100")){
-
-			MotionFilepath="motions/Forwards100.motion";
+			MotionFilepath="motions/turnOver2.motion";
 			
 		}else if (motionName.equalsIgnoreCase("KickSideRight")){
 

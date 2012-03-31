@@ -19,8 +19,9 @@ public class InitAgent {
 		int cyrcles=ServerCyrcles.getCyrclesNow();
 		//boolean AgentInitialized=false;
 		if(cyrcles>0 && cyrcles<10){
-			if(cyrcles==1){			
-				new BehaviorStateMachine("goToPos","start");
+			if(cyrcles==1){
+				
+				new BehaviorStateMachine("KickTheBallToGoal","start");
 				CurrentMotion.setSoftChangeCounter(0);
 				InitAgent.setPlayerInited(false);
 				BehaviorDone.setName("");

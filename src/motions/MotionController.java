@@ -55,15 +55,7 @@ public class MotionController {
 			speed=3;
 			speedControl=10;
 			poseOffset=2;
-			
-		}else if (Motion.equalsIgnoreCase("Forwards100")){
-
-			endMotionPose=150;
-			speed=3;
-			speedControl=10;
-			poseOffset=1;
-			
-		
+					
 		}else if (Motion.equalsIgnoreCase("SideStepLeft")){
 
 			endMotionPose=124;
@@ -76,7 +68,7 @@ public class MotionController {
 
 			endMotionPose=145;
 			speed=2;
-			speedControl=9;
+			speedControl=10;
 			poseOffset=2;
 			hardness=0.7;
 			
@@ -84,12 +76,19 @@ public class MotionController {
 
 			endMotionPose=61;
 			speed=3;
-			speedControl=10;
+			speedControl=9;
 			poseOffset=1;
 			
 		}else if (Motion.equalsIgnoreCase("KickForwardLeft")){
 
 			endMotionPose=61;
+			speed=3;
+			speedControl=9;
+			poseOffset=1;
+			
+		}else if (Motion.equalsIgnoreCase("chinaStandUp3")){
+
+			endMotionPose=11;
 			speed=3;
 			speedControl=10;
 			poseOffset=1;
@@ -107,19 +106,26 @@ public class MotionController {
 			speed=3;
 			speedControl=10;
 			poseOffset=1;
-			
-		}else if (Motion.equalsIgnoreCase("Aerobic")){
+						
+		}else if (Motion.equalsIgnoreCase("turnOver2")){
 
-			endMotionPose=10;
-			speed=3;
+			endMotionPose=13;
+			speed=5;
 			speedControl=10;
 			poseOffset=1;
-			
+					
 		}else if (Motion.equalsIgnoreCase("KickSideRight")){
 
 			endMotionPose=38;
 			speed=3;
 			speedControl=10;
+			poseOffset=1;
+			
+		}else if (Motion.equalsIgnoreCase("StandUpFromFront")){
+
+			endMotionPose=35;
+			speed=2;
+			speedControl=5;
 			poseOffset=1;
 
 		}else{

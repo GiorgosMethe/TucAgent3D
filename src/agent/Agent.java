@@ -2,6 +2,7 @@ package agent;
 import communication.HearMessage;
 import communication.SendMessage;
 
+import localization.AgentPosition;
 import localization.BallPosition;
 import localization.Landmark;
 import localization.LocalizationResults;
@@ -10,11 +11,19 @@ import motions.MotionController;
 import motions.MotionTrigger;
 import behavior.BehaviorFactory;
 import behavior.BehaviorStateMachine;
+import behavior.DefenderCenter;
+import behavior.DefenderLeft;
+import behavior.DefenderRight;
+import behavior.ForwardCenter;
+import behavior.ForwardLeft;
+import behavior.ForwardRight;
+import behavior.Goalie;
 import action.SeekBall;
 import connection.Connection;
 import connection.MessageController;
 import connection.ServerCyrcles;
 import perceptor.Ball;
+import perceptor.GyroScope;
 import worldState.GameState;
 import worldState.TeamState;
 
@@ -32,7 +41,16 @@ public class Agent {
 
 		MessageController Gp = new MessageController();
 		SeekBall Sb = new SeekBall();
+		
 		BehaviorFactory Bh = new BehaviorFactory();
+		Goalie Gb = new Goalie();
+		ForwardCenter fc=new ForwardCenter();
+		ForwardLeft fl=new ForwardLeft();
+		ForwardRight fr=new ForwardRight();
+		DefenderCenter dc=new DefenderCenter();
+		DefenderLeft dl=new DefenderLeft();
+		DefenderRight dr=new DefenderRight();
+		
 		SendMessage sm = new SendMessage();
 		MotionController dnc=new MotionController();
 
@@ -56,8 +74,9 @@ public class Agent {
 		//server cyrcles
 		int i=0;
 
+		float max=0;
 		//player number
-		num=3;
+		num=2;
 		// team name
 		String Teamname="tuc";
 		//player position
@@ -79,12 +98,26 @@ public class Agent {
 			InitAgent.Init(Teamname, num, beam, con);
 			//think
 			if(!GameState.getGameState().equalsIgnoreCase("BeforeKickOff") && InitAgent.isPlayerInited()==true){	
-				Bh.BehaviorController();
+				
+				//if(num==1){
+				
+				//Gb.BehaviorController();
+				//}else{
+				//if((Math.abs(GyroScope.getAngleZ())+Math.abs(GyroScope.getAngleZ()+Math.abs(GyroScope.getAngleZ())))>500){
+
+				//	BehaviorStateMachine.setName("Fallen");
+				//	BehaviorStateMachine.setState("start");
+	
+				//}
+	
+			Bh.BehaviorController();
+				//}
 				//Communication
 				//say message
-				sm.Say("distance", con);
-				HearMessage.MessageDecoder();
+				//sm.Say("distance", con);
+				//HearMessage.MessageDecoder();
 			}
+			//MotionTrigger.setMotion("turnOver2");
 			//get the head movement
 			String headAct=Sb.MoveHead();
 			//get the agent action
