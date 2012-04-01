@@ -4,7 +4,6 @@ import action.Kick;
 import action.TakeGoaliePos;
 import action.TurnToBall;
 import action.TurnToSeeBall;
-import action.WalkToBall;
 import motions.MotionTrigger;
 import perceptor.Ball;
 import perceptor.Vision;
@@ -16,7 +15,6 @@ public class Goalie {
 
 		TurnToSeeBall tTsB=new TurnToSeeBall();
 		TurnToBall tTb=new TurnToBall();
-		WalkToBall wTb=new WalkToBall();
 		Kick Kb=new Kick();
 		TakeGoaliePos tGp=new TakeGoaliePos();
 		

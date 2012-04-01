@@ -26,6 +26,7 @@ public class MessageController {
 
 	}
 	int k=0;
+	@SuppressWarnings("static-access")
 	public void GetPerceptors(Connection con) {
 
 		Vector<String> message = con.GetVector();
@@ -417,6 +418,7 @@ public class MessageController {
 					LocalizationResults.setCoplayers(coplayers);
 					LocalizationResults.setRivals(rivals);
 					for(int jj=0;jj<coplayers.size();jj++){
+						@SuppressWarnings("unused")
 						Coordinate found_player=localizer.get_det_with_distance_angle(curloc.getX(),curloc.getY() , (head_angle+coplayers.elementAt(jj).getHorizontal_Angle()), coplayers.elementAt(jj).getDistance());
 						//System.out.println("i see teammate with id ( "+ coplayers.elementAt(jj).getName()+" ) at distance ( "+coplayers.elementAt(jj).getDistance()+" ) at angle "+coplayers.elementAt(jj).getHorizontal_Angle());
 						//System.out.println("and see him at ( "+found_player.getX()+" , "+found_player.getY()+" )");
@@ -425,6 +427,7 @@ public class MessageController {
 						//System.out.println("I see no teammates");
 					}
 					for(int jj=0;jj<rivals.size();jj++){
+						@SuppressWarnings("unused")
 						Coordinate found_player=localizer.get_det_with_distance_angle(curloc.getX(),curloc.getY() , (head_angle+rivals.elementAt(jj).getHorizontal_Angle()), rivals.elementAt(jj).getDistance());
 						//System.out.println("i see rival with id ( "+ rivals.elementAt(jj).getName()+" ) at distance ( "+rivals.elementAt(jj).getDistance()+" ) at angle "+rivals.elementAt(jj).getHorizontal_Angle());
 						//System.out.println("and see him at ( "+found_player.getX()+" , "+found_player.getY()+" )");

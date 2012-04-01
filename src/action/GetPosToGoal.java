@@ -1,23 +1,25 @@
 package action;
 
-import connection.ServerCyrcles;
 import behavior.BehaviorStateMachine;
 import localization.BallPosition;
-import localization.Coordinate;
 import localization.Landmark;
 import localization.LocalizationResults;
 import motions.MotionTrigger;
-import perceptor.Ball;
 import perceptor.HingeJointPerceptor;
 import worldState.TeamState;
 
 public class GetPosToGoal {
 
+	@SuppressWarnings("unused")
+	private float distance1;
+	@SuppressWarnings("unused")
+	private float distance2;
+
 	public void Act(){
 
 		boolean iseegoal=false;
-		float Distance1 = 0;
-		float Distance2 = 0;
+		distance1 = 0;
+		distance2 = 0;
 		float Angle1=0;
 		float Angle2 = 0;
 		float prefferedAngleKick=0;
@@ -26,13 +28,13 @@ public class GetPosToGoal {
 			
 			if(a.getName().equalsIgnoreCase(TeamState.getOppGoal1())){
 				iseegoal=true;
-				Distance1=(float) a.getDistance();
+				distance1=(float) a.getDistance();
 				Angle1=(float) a.getHorizontal_Angle();
 				//System.out.println("blepw to aristero");
 			}
 			if(a.getName().equalsIgnoreCase(TeamState.getOppGoal2())){
 				iseegoal=true;
-				Distance2=(float) a.getDistance();
+				distance2=(float) a.getDistance();
 				Angle2=(float) a.getHorizontal_Angle();
 				//System.out.println("blepw to aristero");
 			}
@@ -48,16 +50,6 @@ public class GetPosToGoal {
 			
 		}
 			
-//			System.out.println("paw na brw gwnia");
-//			
-//			System.out.println("body angle:"+LocalizationResults.getBody_angle());
-//			System.out.println("distanceL"+Distance1);
-//			System.out.println("angleL"+Angle1);
-//			System.out.println("distanceR"+Distance2);
-//			System.out.println("angleR"+Angle2);
-//			System.out.println("PrefferedKick"+prefferedAngleKick);
-//			System.out.println("--------------------------------------");
-
 
 			if(Math.abs(LocalizationResults.getBody_angle()-prefferedAngleKick)>20){
 

@@ -1,7 +1,5 @@
 package communication;
 
-import java.util.Vector;
-
 import worldState.TeamState;
 
 

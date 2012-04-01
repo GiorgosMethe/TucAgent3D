@@ -1,12 +1,8 @@
 package action;
 
 import localization.BallPosition;
-import localization.Landmark;
-import localization.LocalizationResults;
 import motions.MotionTrigger;
-import perceptor.Ball;
 import perceptor.HingeJointPerceptor;
-import worldState.TeamState;
 
 public class GoToPos {
 

@@ -13,15 +13,20 @@ import connection.ServerCyrcles;
 public class InitAgent {
 
 	public static boolean playerReady;
+	
 
-	public static void Init(String Teamname, int number,String beam, Connection con){
+	public static void Init(String Teamname, int number,Connection con){
 
+		Beam bm=new Beam();
+		String beam=bm.Init(number);
 		int cyrcles=ServerCyrcles.getCyrclesNow();
 		//boolean AgentInitialized=false;
 		if(cyrcles>0 && cyrcles<10){
 			if(cyrcles==1){
 				
+				
 				new BehaviorStateMachine("goToPos","start");
+					
 				CurrentMotion.setSoftChangeCounter(0);
 				InitAgent.setPlayerInited(false);
 				BehaviorDone.setName("");

@@ -2,10 +2,8 @@ package action;
 
 import connection.ServerCyrcles;
 import localization.Coordinate;
-import localization.Landmark;
 import localization.LocalizationResults;
 import motions.MotionTrigger;
-import perceptor.HingeJointPerceptor;
 
 public class WalkTo {
 	

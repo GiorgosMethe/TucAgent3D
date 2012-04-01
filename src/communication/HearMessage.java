@@ -91,42 +91,54 @@ public class HearMessage {
 
 	public static void DistMessageAct(String msg[]){
 
+		@SuppressWarnings("unused")
 		float distance = Float.parseFloat(msg[3]);
 
 
 		if(TeamState.getTeamSide().equalsIgnoreCase(msg[1])){
 
+			float min = MessageBuffer.getDistancesBuffer()[1];
 
-			for(int i=1;i<MessageBuffer.getDistancesBuffer().length;i++){
-
+			for(int i=1;i<MessageBuffer.getDistancesBuffer().length-1;i++){
 				if(i==AgentType.getPlayerNum()){
 
 
 				}else{
 
-
-					if(Ball.getDistance()<MessageBuffer.getDistancesBuffer()[i]){
-
-						if(!BehaviorStateMachine.getName().equalsIgnoreCase("goKickTheBall")){
-							BehaviorStateMachine.setName("goKickTheBall");
-							BehaviorStateMachine.setState("start");
-						}
-					}else{
-
-						System.out.println("mou milaei allos kai einai pio konta");
-						if(!BehaviorStateMachine.getName().equalsIgnoreCase("Wait")){
-
-							if(BehaviorStateMachine.getName().equalsIgnoreCase("Fallen")){
-								BehaviorStateMachine.setName("Fallen");
-								return;
-							}
-							BehaviorStateMachine.setName("Wait");
-							BehaviorStateMachine.setState("start");
+					if(MessageBuffer.getDistancesBuffer()[i]!=0.0f){
+						if(MessageBuffer.getDistancesBuffer()[i]<min){
+							min = MessageBuffer.getDistancesBuffer()[i];
 						}
 					}
 
 				}
+
 			}
+
+
+			if(Ball.getDistance()<min){
+
+				if(!BehaviorStateMachine.getName().equalsIgnoreCase("KickTheBallToGoal")){
+					BehaviorStateMachine.setName("KickTheBallToGoal");
+					BehaviorStateMachine.setState("start");
+				}
+			}else{
+
+				System.out.println("mou milaei allos kai einai pio konta");
+				if(!BehaviorStateMachine.getName().equalsIgnoreCase("goToPos")){
+
+					if(BehaviorStateMachine.getName().equalsIgnoreCase("Fallen")){
+						BehaviorStateMachine.setName("Fallen");
+						return;
+					}
+					BehaviorStateMachine.setName("goToPos");
+					BehaviorStateMachine.setState("start");
+				}
+			}
+
+
+
+
 		}
 
 	}

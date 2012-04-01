@@ -2,7 +2,6 @@ package behavior;
 
 
 import motions.MotionTrigger;
-import action.GetKickablePosition;
 import action.GetPosToGoal;
 import action.GetUp;
 import action.GoToPos;
@@ -21,7 +20,6 @@ public class BehaviorFactory {
 	TurnToBall tTb=new TurnToBall();
 	WalkToBall wTb=new WalkToBall();
 	Kick Kb=new Kick();
-	GetKickablePosition gKp = new GetKickablePosition();
 	GetPosToGoal gPtG = new GetPosToGoal();
 	GoToPos gTp= new GoToPos();
 	StandUp sU=new StandUp();
@@ -233,13 +231,13 @@ public class BehaviorFactory {
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("iSeeBall")){
 
 				
-				if(Ball.isSeeTheBall()==true){
-					if(Ball.getDistance()>5){
-						gTp.Act();
-					}else{
-						BehaviorStateMachine.setState("start");
-					}
+				if(Ball.getDistance()>5){
+					
+					gTp.Act();
+					BehaviorStateMachine.setState("start");
+					
 				}else{
+					
 					BehaviorStateMachine.setState("start");
 				}
 
@@ -307,23 +305,12 @@ public class BehaviorFactory {
 				}else{
 
 				}
-				
-				
-				
-				
+		
 				
 			}
 
 
 		}
-
-
-
-
-
-
-
-
 
 
 	}

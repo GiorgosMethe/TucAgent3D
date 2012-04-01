@@ -3,7 +3,6 @@ package behavior;
 import motions.MotionTrigger;
 import perceptor.Ball;
 import perceptor.Vision;
-import action.GetKickablePosition;
 import action.GetPosToGoal;
 import action.GetUp;
 import action.GoToPos;
@@ -21,7 +20,6 @@ public class ForwardLeft {
 	TurnToBall tTb=new TurnToBall();
 	WalkToBall wTb=new WalkToBall();
 	Kick Kb=new Kick();
-	GetKickablePosition gKp = new GetKickablePosition();
 	GetPosToGoal gPtG = new GetPosToGoal();
 	GoToPos gTp= new GoToPos();
 	StandUp sU=new StandUp();
@@ -31,10 +29,10 @@ public class ForwardLeft {
 	public void BehaviorController(){
 
 		System.out.println("Behavior:"+BehaviorStateMachine.getName());
-
-		System.out.println("Behavior:"+BehaviorStateMachine.getState());
-
-		System.out.println("Motion:"+MotionTrigger.getMotion());
+//
+//		System.out.println("Behavior:"+BehaviorStateMachine.getState());
+//
+//		System.out.println("Motion:"+MotionTrigger.getMotion());
 
 
 
@@ -232,10 +230,13 @@ public class ForwardLeft {
 
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("iSeeBall")){
 
-				gTp.Act();
-				if(Ball.isSeeTheBall()==true){
+				if(Ball.getDistance()>4){
+
+					gTp.Act();
+					BehaviorStateMachine.setState("start");
 
 				}else{
+					MotionTrigger.setMotion("");
 					BehaviorStateMachine.setState("start");
 				}
 
@@ -260,7 +261,7 @@ public class ForwardLeft {
 				BehaviorDone.setName("");
 				BehaviorDone.setBehaviorDone(true);
 				BehaviorStateMachine.setState("turnOver");
-				
+
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("turnOver")){
 
 				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
@@ -276,7 +277,7 @@ public class ForwardLeft {
 				}
 
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("standup")){
-				
+
 				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
 					BehaviorDone.setBehaviorDone(false);
 					BehaviorDone.setName("standup");
@@ -288,9 +289,9 @@ public class ForwardLeft {
 				}else{
 
 				}
-				
+
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("getup")){
-				
+
 				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
 					BehaviorDone.setBehaviorDone(false);
 					BehaviorDone.setName("getup");
@@ -303,11 +304,11 @@ public class ForwardLeft {
 				}else{
 
 				}
-				
-				
-				
-				
-				
+
+
+
+
+
 			}
 
 
@@ -323,5 +324,6 @@ public class ForwardLeft {
 
 
 	}
+
 
 }
