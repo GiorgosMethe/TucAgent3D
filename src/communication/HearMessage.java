@@ -1,3 +1,22 @@
+/*******************************************************************************
+ * Copyright 2012, Technical University of Crete
+ * Autonomous Agents, winter semester 2011-12
+ * Semester Assignement
+ * 
+ * @author Methenitis Giorgos
+ * @author Mpountouris Konstantinos
+ * @author Papadimitriou Maouro Vassilis
+ * @author Skipetaris Dimosthenis 
+ *
+ * This file is part of magmaOffenburg.
+ *
+ * Tuc Agent 3D is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *******************************************************************************/
+
+
 package communication;
 
 import connection.Connection;
@@ -94,50 +113,45 @@ public class HearMessage {
 		@SuppressWarnings("unused")
 		float distance = Float.parseFloat(msg[3]);
 
+		if(AgentType.getPlayerNum()!=1){
 
-		if(TeamState.getTeamSide().equalsIgnoreCase(msg[1])){
+			if(TeamState.getTeamSide().equalsIgnoreCase(msg[1])){
 
-			float min = MessageBuffer.getDistancesBuffer()[1];
+				float min = 100;
 
-			for(int i=1;i<MessageBuffer.getDistancesBuffer().length-1;i++){
-				if(i==AgentType.getPlayerNum()){
+				for(int i=2;i<MessageBuffer.getDistancesBuffer().length;i++){
 
-
-				}else{
-
-					if(MessageBuffer.getDistancesBuffer()[i]!=0.0f){
-						if(MessageBuffer.getDistancesBuffer()[i]<min){
-							min = MessageBuffer.getDistancesBuffer()[i];
+					if(i!=AgentType.getPlayerNum()){
+						if(MessageBuffer.getDistancesBuffer()[i]!=0.0f){
+							if(MessageBuffer.getDistancesBuffer()[i]<min){
+								min = MessageBuffer.getDistancesBuffer()[i];
+							}
 						}
 					}
-
 				}
+				;
+				if(Ball.getDistance()<min){
 
-			}
-
-
-			if(Ball.getDistance()<min){
-
-				if(!BehaviorStateMachine.getName().equalsIgnoreCase("KickTheBallToGoal")){
-					BehaviorStateMachine.setName("KickTheBallToGoal");
-					BehaviorStateMachine.setState("start");
-				}
-			}else{
-
-				System.out.println("mou milaei allos kai einai pio konta");
-				if(!BehaviorStateMachine.getName().equalsIgnoreCase("goToPos")){
-
-					if(BehaviorStateMachine.getName().equalsIgnoreCase("Fallen")){
-						BehaviorStateMachine.setName("Fallen");
-						return;
+					if(!BehaviorStateMachine.getName().equalsIgnoreCase("KickTheBallToGoal")){
+						BehaviorStateMachine.setName("KickTheBallToGoal");
+						BehaviorStateMachine.setState("start");
 					}
-					BehaviorStateMachine.setName("goToPos");
-					BehaviorStateMachine.setState("start");
+				}else{
+					if(!BehaviorStateMachine.getName().equalsIgnoreCase("goToPos")){
+
+						if(BehaviorStateMachine.getName().equalsIgnoreCase("Fallen")){
+							BehaviorStateMachine.setName("Fallen");
+							return;
+						}
+						BehaviorStateMachine.setName("goToPos");
+						BehaviorStateMachine.setState("start");
+					}
 				}
+
+
+
+
 			}
-
-
-
 
 		}
 

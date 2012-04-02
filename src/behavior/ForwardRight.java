@@ -1,7 +1,27 @@
+/*******************************************************************************
+ * Copyright 2012, Technical University of Crete
+ * Autonomous Agents, winter semester 2011-12
+ * Semester Assignement
+ * 
+ * @author Methenitis Giorgos
+ * @author Mpountouris Konstantinos
+ * @author Papadimitriou Maouro Vassilis
+ * @author Skipetaris Dimosthenis 
+ *
+ * This file is part of magmaOffenburg.
+ *
+ * Tuc Agent 3D is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *******************************************************************************/
+
 package behavior;
 
+import localization.BallPosition;
 import motions.MotionTrigger;
 import perceptor.Ball;
+import perceptor.HingeJointPerceptor;
 import perceptor.Vision;
 import action.GetPosToGoal;
 import action.GetUp;
@@ -26,15 +46,6 @@ public class ForwardRight {
 	GetUp gU=new GetUp();
 
 	public void BehaviorController(){
-
-		System.out.println("Behavior:"+BehaviorStateMachine.getName());
-//
-//		System.out.println("Behavior:"+BehaviorStateMachine.getState());
-//
-//		System.out.println("Motion:"+MotionTrigger.getMotion());
-
-
-
 
 
 		////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,16 +90,31 @@ public class ForwardRight {
 
 				BehaviorStateMachine.setState("start");
 
-			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("walkToBall")){
+			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("goBall")){
 
 				if(Ball.getDistance()>0.5){
 					wTb.Act();
-					BehaviorStateMachine.setState("walkToBall");
+					BehaviorStateMachine.setState("goBall");
 				}else{
+					BehaviorStateMachine.setState("StraightToBall");
 
+
+				}
+
+			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("StraightToBall")){
+
+				if(Math.abs((HingeJointPerceptor.getHj1()+BallPosition.getAngle()))>15){
+
+					if(HingeJointPerceptor.getHj1()>0){
+						MotionTrigger.setMotion("TurnLeft40");
+
+					}else{
+						MotionTrigger.setMotion("TurnRight40");
+
+					}
+					
+				}else{
 					BehaviorStateMachine.setState("Kick");
-
-
 				}			
 
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("Kick")){
@@ -178,11 +204,26 @@ public class ForwardRight {
 					wTb.Act();
 					BehaviorStateMachine.setState("goBall");
 				}else{
-					BehaviorStateMachine.setState("Kick");
+					BehaviorStateMachine.setState("StraightToBall");
 
 
 				}
 
+			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("StraightToBall")){
+
+				if(Math.abs((HingeJointPerceptor.getHj1()+BallPosition.getAngle()))>15){
+
+					if(HingeJointPerceptor.getHj1()>0){
+						MotionTrigger.setMotion("TurnLeft40");
+
+					}else{
+						MotionTrigger.setMotion("TurnRight40");
+
+					}
+					
+				}else{
+					BehaviorStateMachine.setState("Kick");
+				}
 
 			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("Kick")){
 
@@ -254,8 +295,6 @@ public class ForwardRight {
 			//////////////////////////////////////////////////////////////////////////////////////////////
 
 		}else if(BehaviorStateMachine.getName().equalsIgnoreCase("Fallen")){
-
-
 			if(BehaviorStateMachine.getState().equalsIgnoreCase("start")){
 				BehaviorDone.setName("");
 				BehaviorDone.setBehaviorDone(true);

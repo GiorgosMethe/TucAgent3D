@@ -1,3 +1,21 @@
+/*******************************************************************************
+ * Copyright 2012, Technical University of Crete
+ * Autonomous Agents, winter semester 2011-12
+ * Semester Assignement
+ * 
+ * @author Methenitis Giorgos
+ * @author Mpountouris Konstantinos
+ * @author Papadimitriou Maouro Vassilis
+ * @author Skipetaris Dimosthenis 
+ *
+ * This file is part of magmaOffenburg.
+ *
+ * Tuc Agent 3D is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *******************************************************************************/
+
 package motions;
 import behavior.BehaviorDone;
 import connection.Connection;
@@ -85,14 +103,7 @@ public class MotionController {
 			speed=3;
 			speedControl=9;
 			poseOffset=1;
-			
-		}else if (Motion.equalsIgnoreCase("chinaStandUp3")){
-
-			endMotionPose=11;
-			speed=3;
-			speedControl=10;
-			poseOffset=1;
-			
+						
 		}else if (Motion.equalsIgnoreCase("Init")){
 
 			endMotionPose=6;
@@ -107,12 +118,6 @@ public class MotionController {
 			speedControl=10;
 			poseOffset=1;
 						
-		}else if (Motion.equalsIgnoreCase("turnOver2")){
-
-			endMotionPose=13;
-			speed=5;
-			speedControl=10;
-			poseOffset=1;
 					
 		}else if (Motion.equalsIgnoreCase("KickSideRight")){
 
@@ -121,12 +126,27 @@ public class MotionController {
 			speedControl=10;
 			poseOffset=1;
 			
+		}else if (Motion.equalsIgnoreCase("TurnOver")){
+
+			//endMotionPose=35;
+			endMotionPose=16;
+			speed=30;
+			speedControl=40;
+			poseOffset=1;
+			
 		}else if (Motion.equalsIgnoreCase("StandUpFromFront")){
 
-			endMotionPose=35;
-			speed=2;
-			speedControl=5;
+			endMotionPose=23;
+			speed=15;
+			speedControl=30;
 			poseOffset=1;
+
+		}else if (Motion.equalsIgnoreCase("Backwards")){
+
+			endMotionPose=66;
+			speed=3;
+			speedControl=10;
+			poseOffset=2;
 
 		}else{
 

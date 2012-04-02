@@ -1,3 +1,21 @@
+/*******************************************************************************
+ * Copyright 2012, Technical University of Crete
+ * Autonomous Agents, winter semester 2011-12
+ * Semester Assignement
+ * 
+ * @author Methenitis Giorgos
+ * @author Mpountouris Konstantinos
+ * @author Papadimitriou Maouro Vassilis
+ * @author Skipetaris Dimosthenis 
+ *
+ * This file is part of magmaOffenburg.
+ *
+ * Tuc Agent 3D is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *******************************************************************************/
+
 package motions;
 
 import java.io.BufferedReader;
@@ -119,14 +137,6 @@ public class Motions {
 
 			MotionFilepath="motions/Backwards.motion";
 
-		}else if (motionName.equalsIgnoreCase("HandWave")){
-
-			MotionFilepath="motions/HandWave.motion";
-
-		}else if (motionName.equalsIgnoreCase("Shoot")){
-
-			MotionFilepath="motions/Shoot.motion";
-
 		}else if (motionName.equalsIgnoreCase("SideStepLeft")){
 
 			MotionFilepath="motions/SideStepLeft.motion";
@@ -166,22 +176,18 @@ public class Motions {
 		}else if (motionName.equalsIgnoreCase("KickForwardRight")){
 
 			MotionFilepath="motions/KickForwardRight.motion";
-			
-		}else if (motionName.equalsIgnoreCase("getup")){
-
-			MotionFilepath="motions/getup.motion";
 		
 		}else if (motionName.equalsIgnoreCase("leftFall")){
 
 			MotionFilepath="motions/leftFall.motion";
 			
-		}else if (motionName.equalsIgnoreCase("turnOver2")){
-
-			MotionFilepath="motions/turnOver2.motion";
-			
 		}else if (motionName.equalsIgnoreCase("KickSideRight")){
 
 			MotionFilepath="motions/KickSideRight.motion";
+			
+		}else if (motionName.equalsIgnoreCase("TurnOver")){
+
+			MotionFilepath="motions/TurnOver.motion";
 			
 		}else if (motionName.equalsIgnoreCase("KickForwardLeft")){
 

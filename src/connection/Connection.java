@@ -172,7 +172,7 @@ public class Connection {
 			}
 
 			msg = new String(result, 0, length, "UTF-8");
-			System.out.println("--" + msg + "\n");
+			//System.out.println("--" + msg + "\n");
 
 		} catch (IOException e) {
 			System.out

@@ -1,3 +1,22 @@
+/*******************************************************************************
+ * Copyright 2012, Technical University of Crete
+ * Autonomous Agents, winter semester 2011-12
+ * Semester Assignement
+ * 
+ * @author Methenitis Giorgos
+ * @author Mpountouris Konstantinos
+ * @author Papadimitriou Maouro Vassilis
+ * @author Skipetaris Dimosthenis 
+ *
+ * This file is part of magmaOffenburg.
+ *
+ * Tuc Agent 3D is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *******************************************************************************/
+
+
 package agent;
 import communication.HearMessage;
 import communication.SendMessage;
@@ -25,9 +44,10 @@ public class Agent {
 	@SuppressWarnings("unused")
 	private static float max;
 
+	public static String Teamname="";
 	public static void main(String[] args) {
-		
-		
+
+
 		Check Ch=new Check();
 		MessageController Gp = new MessageController();
 		SeekBall Sb = new SeekBall();
@@ -36,8 +56,10 @@ public class Agent {
 		Think think=new Think();
 		isFallen iF=new isFallen();
 		//connection config
+		//String host = args[0];
 		String host = "127.0.0.1";
-		int port = 3100;
+		//int port = Integer.parseInt(args[1]);
+		int port=3100;
 		//initializes the connection
 		Connection con = new Connection(host,port);
 		boolean isConnected = false;
@@ -51,14 +73,17 @@ public class Agent {
 		int i=0;
 		max = 0;
 		//player number
-		num=7;
+		//num=7;
+		num=5;
+		Teamname="tuc";
 		// team name
-		String Teamname="tuc";
+		//String Teamname=args[2];
 		//player position
 		Ch.Number(num);
 
 
 		while(con.isConnected()){
+
 
 			i++;
 			//update perceptors
@@ -70,13 +95,14 @@ public class Agent {
 			//init Agent
 			InitAgent.Init(Teamname, num, con);
 			//think
+
 			if(!GameState.getGameState().equalsIgnoreCase("BeforeKickOff") && InitAgent.isPlayerInited()==true){	
 				think.Role(num);
-				iF.Check();
 				sm.Say("distance", con);
 				HearMessage.MessageDecoder();
 			}
-			//MotionTrigger.setMotion("turnOver2");
+			//check if i am down
+			iF.Check();
 			//get the head movement
 			String headAct=Sb.MoveHead();
 			//get the agent action
@@ -85,9 +111,10 @@ public class Agent {
 			String Act=headAct+AgentAct;
 			//Act
 			con.sendMessage(Act);
-			
-			
-			
+
+
+
+
 		}
 
 	}

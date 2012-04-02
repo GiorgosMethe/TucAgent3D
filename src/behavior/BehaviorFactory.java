@@ -1,7 +1,25 @@
+/*******************************************************************************
+ * Copyright 2012, Technical University of Crete
+ * Autonomous Agents, winter semester 2011-12
+ * Semester Assignement
+ * 
+ * @author Methenitis Giorgos
+ * @author Mpountouris Konstantinos
+ * @author Papadimitriou Maouro Vassilis
+ * @author Skipetaris Dimosthenis 
+ *
+ * This file is part of magmaOffenburg.
+ *
+ * Tuc Agent 3D is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *******************************************************************************/
+
 package behavior;
 
 
-import motions.MotionTrigger;
+
 import action.GetPosToGoal;
 import action.GetUp;
 import action.GoToPos;
@@ -27,16 +45,6 @@ public class BehaviorFactory {
 	GetUp gU=new GetUp();
 
 	public void BehaviorController(){
-
-		System.out.println("Behavior:"+BehaviorStateMachine.getName());
-
-		System.out.println("Behavior:"+BehaviorStateMachine.getState());
-
-		System.out.println("Motion:"+MotionTrigger.getMotion());
-
-
-
-
 
 		////////////////////////////////////////////////////////////////////////////////////////////////
 		///////////////////////////////////////go kick the ball////////////////////////////////////////
@@ -258,56 +266,56 @@ public class BehaviorFactory {
 		}else if(BehaviorStateMachine.getName().equalsIgnoreCase("Fallen")){
 
 
-			if(BehaviorStateMachine.getState().equalsIgnoreCase("start")){
-				BehaviorDone.setName("");
-				BehaviorDone.setBehaviorDone(true);
-				BehaviorStateMachine.setState("turnOver");
-				
-			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("turnOver")){
-
-				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
-					BehaviorDone.setBehaviorDone(false);
-					BehaviorDone.setName("turnOver");
-					tO.Act();				
-				}else if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("turnOver")){
-					BehaviorDone.setName("");
-					BehaviorDone.setBehaviorDone(true);
-					BehaviorStateMachine.setState("standup");
-				}else{
-
-				}
-
-			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("standup")){
-				
-				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
-					BehaviorDone.setBehaviorDone(false);
-					BehaviorDone.setName("standup");
-					sU.Act();				
-				}else if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("standup")){
-					BehaviorDone.setName("");
-					BehaviorDone.setBehaviorDone(true);
-					BehaviorStateMachine.setState("getup");
-				}else{
-
-				}
-				
-			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("getup")){
-				
-				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
-					BehaviorDone.setBehaviorDone(false);
-					BehaviorDone.setName("getup");
-					gU.Act();				
-				}else if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("getup")){
-					BehaviorDone.setName("");
-					BehaviorDone.setBehaviorDone(true);
-					BehaviorStateMachine.setState("KickTheBallToGoal");
-					BehaviorStateMachine.setName("start");
-				}else{
-
-				}
-		
-				
-			}
+//			if(BehaviorStateMachine.getState().equalsIgnoreCase("start")){
+//				BehaviorDone.setName("");
+//				BehaviorDone.setBehaviorDone(true);
+//				BehaviorStateMachine.setState("turnOver");
+//				
+//			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("turnOver")){
+//
+//				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
+//					BehaviorDone.setBehaviorDone(false);
+//					BehaviorDone.setName("turnOver");
+//					tO.Act();				
+//				}else if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("turnOver")){
+//					BehaviorDone.setName("");
+//					BehaviorDone.setBehaviorDone(true);
+//					BehaviorStateMachine.setState("standup");
+//				}else{
+//
+//				}
+//
+//			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("standup")){
+//				
+//				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
+//					BehaviorDone.setBehaviorDone(false);
+//					BehaviorDone.setName("standup");
+//					sU.Act();				
+//				}else if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("standup")){
+//					BehaviorDone.setName("");
+//					BehaviorDone.setBehaviorDone(true);
+//					BehaviorStateMachine.setState("getup");
+//				}else{
+//
+//				}
+//				
+//			}else if(BehaviorStateMachine.getState().equalsIgnoreCase("getup")){
+//				
+//				if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("")){
+//					BehaviorDone.setBehaviorDone(false);
+//					BehaviorDone.setName("getup");
+//					gU.Act();				
+//				}else if(BehaviorDone.isBehaviorDone()==true && BehaviorDone.getName().equalsIgnoreCase("getup")){
+//					BehaviorDone.setName("");
+//					BehaviorDone.setBehaviorDone(true);
+//					BehaviorStateMachine.setState("KickTheBallToGoal");
+//					BehaviorStateMachine.setName("start");
+//				}else{
+//
+//				}
+//		
+//				
+//			}
 
 
 		}
